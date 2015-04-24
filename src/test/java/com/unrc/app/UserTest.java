@@ -14,7 +14,7 @@ import static org.javalite.test.jspec.JSpec.the;
 public class UserTest {
     @Before
     public void before(){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_test", "franco", "franco");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://127.0.0.1/connect4_test", "franco", "franco");
         System.out.println("UserTest setup");
         Base.openTransaction();
     }

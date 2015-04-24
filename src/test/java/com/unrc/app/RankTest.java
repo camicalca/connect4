@@ -14,7 +14,7 @@ import static org.javalite.test.jspec.JSpec.the;
 // public class RankTest {
 //     @Before
 //     public void before(){
-//         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_test", "root", "santip35");
+//         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_test", "root", "Control123");
 //         System.out.println("RankTest setup");
 //         Base.openTransaction();
 //     }

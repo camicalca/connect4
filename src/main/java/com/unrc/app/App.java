@@ -1,6 +1,6 @@
 package com.unrc.app;
 
-import com.unrc.app.User;
+import com.unrc.app.*;
 import org.javalite.activejdbc.Base;
 
 /**
@@ -13,7 +13,7 @@ public class App
     {
         System.out.println( "Hello World!" );
 
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_test", "root", "Control123");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_develpment", "root", "Control123");
 
         User u = new User();
         u.set("first_name", "Santi");

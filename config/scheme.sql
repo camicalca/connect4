@@ -15,12 +15,7 @@ CREATE TABLE users(
   	games_won INT(11) NOT NULL, 
    
 );
-DROP TABLE IF EXISTE matrix;
-	CREATE TABLE matrix(
-		id INT(11) NOT NULL AUTO_INCREMENT,
-		cell_id INT (11) NOT NULL,
-		CONSTRAINT matrix_pk PRIMARY KEY (id)
-);
+
 
 
 

@@ -17,8 +17,10 @@ public class ComprobarTablero {
         recorridoVerticalSuperior: OK
         recorridoVerticalInferior: OK
     FALTA:
-        recorridoDiagonalSuperior
-        recorridoDiagonalInferior
+        recorridoDiagonalSuperiorDerecho
+        recorridoDiagonalInferiorDerecho
+        recorridoDiagonalSuperiorIzquierdo
+        recorridoDiagonalInferiorIzquierdo
    */ 
 
 /**recorridoHorizontalIzquierdo
@@ -110,7 +112,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
         }
 }
 
- 
+ //NO FUNCIONA
 private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
         coincidencia = true;
@@ -128,7 +130,7 @@ private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int
             return coincidencia;
         }
 }  
-
+//NO FUNCIONA
 private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int columna){
     Boolean coincidencia;
     coincidencia = true;

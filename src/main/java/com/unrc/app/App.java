@@ -13,10 +13,13 @@ public class App
     {
         System.out.println( "Hello World!" );
 
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "franco", "franco");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
 
         User u = new User();
-        u.set("first_name", "Ariel");
+        u.set("first_name", "Santi");
+       
+        Rank r = new Rank();
+        u.add(r);
         u.save();
 
 

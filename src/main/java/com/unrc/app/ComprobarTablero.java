@@ -120,6 +120,7 @@ private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int c
     for (int i=1;i<=3;i++){
         coincidencia = coincidencia && (matriz[fila][columna]==matriz[fila+i][columna+i]);
     }
+    }
     else{
         coincidencia= false;
     } 

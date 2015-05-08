@@ -8,12 +8,11 @@ CREATE TABLE users(
   CONSTRAINT users_pk PRIMARY KEY (id)
 );
 
- DROP TABLE IF EXISTS ranks;
+ DROP TABLE IF EXISTS users;
   CREATE TABLE ranks(
-	id INT(11) not null auto_increment primary key,
-  	user_id INT(11) ,
-  	position INT(11),
-  	games_won INT(11) 
+  	user_id INT(11) NOT NULL,
+  	position INT(11) NOT NULL,
+  	games_won INT(11) NOT NULL 
    
 );
 

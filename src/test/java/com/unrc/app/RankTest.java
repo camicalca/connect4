@@ -29,6 +29,7 @@ public class RankTest {
 
     @Test
     public void shouldValidateMandatoryFields(){
-      //Ranking rank = new Ranking();
+      Rank rank = new Rank();
+      //assertTrue("Ranking no negativo",(rank.getInteger("position")>0));
     }
 }

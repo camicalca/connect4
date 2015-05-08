@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<testsuite tests="1" failures="0" name="com.unrc.app.AppTest" time="0.016" errors="0" skipped="0">
+=======
 <testsuite tests="1" failures="0" name="com.unrc.app.AppTest" time="0.277" errors="0" skipped="0">
+>>>>>>> b951be140de7c5d3a56d28224329b3613290518c
 =======
 <testsuite tests="1" failures="0" name="com.unrc.app.AppTest" time="0.062" errors="0" skipped="0">
 >>>>>>> 4223b298c9f00163a553a50403387207ac0cdb79
@@ -41,6 +45,10 @@
 =======
     <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
     <property name="os.version" value="3.13.0-51-generic"/>
+<<<<<<< HEAD
+    <property name="user.home" value="/home/agustin"/>
+    <property name="user.timezone" value="America/Argentina/Cordoba"/>
+=======
     <property name="user.home" value="/home/santiago"/>
     <property name="user.timezone" value="America/Argentina/Salta"/>
 >>>>>>> 4223b298c9f00163a553a50403387207ac0cdb79
@@ -71,7 +79,11 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
+  <testcase classname="com.unrc.app.UserTest" name="shouldValidateMandatoryFields" time="0.015"/>
+=======
   <testcase classname="com.unrc.app.UserTest" name="shouldValidateMandatoryFields" time="0.275"/>
+>>>>>>> b951be140de7c5d3a56d28224329b3613290518c
 =======
   <testcase classname="com.unrc.app.UserTest" name="shouldValidateMandatoryFields" time="0.061"/>
 >>>>>>> 4223b298c9f00163a553a50403387207ac0cdb79

@@ -109,6 +109,26 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
             return coincidencia;
         }
 }
+<<<<<<< HEAD
+ 
+private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int columna){
+        Boolean coincidencia;
+        coincidencia = true;
+        int filas;
+        int columnas;
+        filas = matriz.length;
+        columnas = matriz[0].length;
+        if ((fila+3)>=filas){
+            return false;
+        }
+        else{
+            for (int i = 1; i<=3; i++){
+                coincidencia = (matriz[fila][columna]==matriz[fila-i][columna-i]) && coincidencia ;
+            }
+            return coincidencia;
+        }
+}  
+=======
 private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int columna){
     Boolean coincidencia;
     coincidencia = true;
@@ -126,6 +146,7 @@ private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int c
     } 
     return coincidencia;
 }
+>>>>>>> b951be140de7c5d3a56d28224329b3613290518c
     
     
     

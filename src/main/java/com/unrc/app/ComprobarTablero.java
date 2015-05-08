@@ -109,7 +109,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
             return coincidencia;
         }
 }
-<<<<<<< HEAD
+
  
 private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
@@ -128,7 +128,7 @@ private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int
             return coincidencia;
         }
 }  
-=======
+
 private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int columna){
     Boolean coincidencia;
     coincidencia = true;
@@ -146,7 +146,7 @@ private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int c
     } 
     return coincidencia;
 }
->>>>>>> b951be140de7c5d3a56d28224329b3613290518c
+
     
     
     

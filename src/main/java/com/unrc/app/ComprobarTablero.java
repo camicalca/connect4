@@ -16,11 +16,10 @@ public class ComprobarTablero {
         recorridoHorizontalDerecho: OK
         recorridoVerticalSuperior: OK
         recorridoVerticalInferior: OK
-    FALTA:
-        recorridoDiagonalSuperiorDerecho
-        recorridoDiagonalInferiorDerecho
-        recorridoDiagonalSuperiorIzquierdo
-        recorridoDiagonalInferiorIzquierdo
+    recorridoDiagonalSuperiorDerecho:OK
+    recorridoDiagonalInferiorDerecho:OK
+    recorridoDiagonalSuperiorIzquierdo:OK
+    recorridoDiagonalInferiorIzquierdo:OK
    */ 
 
 /**recorridoHorizontalIzquierdo

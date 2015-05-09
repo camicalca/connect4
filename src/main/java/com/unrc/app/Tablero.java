@@ -7,7 +7,7 @@ package com.unrc.app;
  */
 public class Tablero {
     private  int [][]matriz;
-    
+    //tablero personalizado
     public Tablero(int filas,int columnas){
         matriz=new int[filas][columnas];
         for(int i=0;i<filas;i++){
@@ -18,9 +18,9 @@ public class Tablero {
     }
     //constructor por defecto
     public Tablero(){
-        matriz=new int[7][7];
+        matriz=new int[7][6];
         for(int i=0;i<7;i++){
-             for(int j=0;j<7;j++){
+             for(int j=0;j<6;j++){
                  matriz[i][j]=0;
             }
         }

@@ -234,36 +234,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
             }
         }
         return coincidencia;
-    }
-  //   public static void toString(int[][] matriz){
-  //     for (int x=0; x < matriz.length; x++) {
-  //       System.out.print("F["+x+"]"+" |");
-  //     for (int y=0; y < matriz[x].length; y++) {
-  //       System.out.print (matriz[x][y]);
-  //     if (y!=matriz[x].length-1) System.out.print("\t");
-  //     }
-  //   System.out.println("|");
-  //   }
-  // }
- 
- /** método main para testeo
-  * @param args 
-  */
-    // public static void main(String[] args){
-    //     int[][] matriz;
-    //     matriz = new int[7][7];
-    //    // matriz[0][0]=1;
-    //     matriz[1][0]=1;
-    //     matriz[2][0]=1;
-    //     matriz[3][0]=1;
-    //     matriz[4][0]=1;
-    //     matriz[5][0]=1;
-    //     matriz[6][0]=1;
-    //     System.out.println(mover(matriz,0,1));
-
-            
-    // }
-  
+    }  
 }
 
 

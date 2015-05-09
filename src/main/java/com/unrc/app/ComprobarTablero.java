@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unrc.app;
 
 /**
@@ -12,10 +8,10 @@ package com.unrc.app;
 public class ComprobarTablero {
     /*  METODOS PARA COMPROBAR SI UN PUNTO DE LA MATRIZ FORMA CUATRO EN LINEA EN TODOS LOS SENTIDOS
     TESTS:
-        recorridoHorizontalIzquierdo: OK
-        recorridoHorizontalDerecho: OK
-        recorridoVerticalSuperior: OK
-        recorridoVerticalInferior: OK
+    recorridoHorizontalIzquierdo: OK
+    recorridoHorizontalDerecho: OK
+    recorridoVerticalSuperior: OK
+    recorridoVerticalInferior: OK
     recorridoDiagonalSuperiorDerecho:OK
     recorridoDiagonalInferiorDerecho:OK
     recorridoDiagonalSuperiorIzquierdo:OK
@@ -52,10 +48,7 @@ private static Boolean recorridoHorizontalIzquierdo(int [][] matriz, int fila, i
 private static Boolean recorridoHorizontalDerecho(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
         coincidencia = true;
-         int filas;
-        int columnas;
-        filas = matriz.length;
-        columnas = matriz[0].length;
+        int columnas= matriz[0].length;
         if ((columna+3)<columnas){
          for (int i = 1; i<=3; i++){   
                coincidencia = (matriz[fila][columna]==matriz[fila][columna+i]) && coincidencia ;
@@ -111,7 +104,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ * @return devuelve true si en diagonal del punto existen otros tres puntos iguales
  */  
  private static Boolean recorridoDiagonalSuperiorDerecho(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
@@ -133,7 +126,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ * @return devuelve true si en diagonal del punto existen otros tres puntos iguales
  */  
  private static Boolean recorridoDiagonalSuperiorIzquierdo(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
@@ -154,7 +147,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ * @return devuelve true si en diagonal del punto existen otros tres puntos iguales
  */  
  private static Boolean recorridoDiagonalInferiorIzquierdo(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
@@ -176,7 +169,7 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ * @return devuelve true si en diagonal del punto existen otros tres puntos iguales
  */  
  private static Boolean recorridoDiagonalInferiorDerecho(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
@@ -200,10 +193,8 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
     public static Boolean ComprobarMatriz(int [][] matriz){
         //Guardo el tamaño de la matriz
         Boolean coincidencia;
-        int filas;
-        int columnas;
-        filas = matriz.length;
-        columnas = matriz[0].length;
+        int filas= matriz.length;
+        int columnas = matriz[0].length;
         coincidencia = false;
         //recorro la matriz
         for( int i =0; i<filas && !coincidencia;i++){

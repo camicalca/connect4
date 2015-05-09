@@ -24,9 +24,10 @@ public class ComprobarTablero {
 public static Boolean isEmpty(int[][] matriz,int fila,int columna){
     return matriz[fila][columna]==0;
 }
+
 public static Boolean mover(int[][] matriz,int columna,int jugador){
     Boolean control=false;
-    for(int i=matriz.length;i>=0 && !control;i--){
+    for(int i=matriz.length-1;i>=0 && !control;i--){
         if(matriz[i][columna]==0){
                matriz[i][columna]=jugador;
                control=true;
@@ -234,39 +235,34 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
         }
         return coincidencia;
     }
- //    public static void toString(int[][] matriz){
- //      for (int x=0; x < matriz.length; x++) {
- //        System.out.print("F["+x+"]"+" |");
- //      for (int y=0; y < matriz[x].length; y++) {
- //        System.out.print (matriz[x][y]);
- //      if (y!=matriz[x].length-1) System.out.print("\t");
- //      }
- //    System.out.println("|");
- //    }
- //  }
+  //   public static void toString(int[][] matriz){
+  //     for (int x=0; x < matriz.length; x++) {
+  //       System.out.print("F["+x+"]"+" |");
+  //     for (int y=0; y < matriz[x].length; y++) {
+  //       System.out.print (matriz[x][y]);
+  //     if (y!=matriz[x].length-1) System.out.print("\t");
+  //     }
+  //   System.out.println("|");
+  //   }
+  // }
  
- // /** método main para testeo
- //  * @param args 
- //  */
- //    public static void main(String[] args){
- //        int[][] matriz;
- //        matriz = new int[7][7];
- //        matriz[0][0]=1;//punto referencia
- //        matriz[1][1]=1;
- //        matriz[2][2]=1;
- //        matriz[3][3]=1;
- //        matriz[4][4]=1;
- //        matriz[5][5]=1;
- //        toString(matriz);
- //        for(int i = 0; i<matriz.length;i++){
- //          for(int j = 0; j<matriz[0].length;j++){
- //            if(recorridoDiagonalInferiorDerecho(matriz,i,j) && matriz[i][j]!=0){
- //              System.out.println("fila: "+i+" columna: "+j);
+ /** método main para testeo
+  * @param args 
+  */
+    // public static void main(String[] args){
+    //     int[][] matriz;
+    //     matriz = new int[7][7];
+    //    // matriz[0][0]=1;
+    //     matriz[1][0]=1;
+    //     matriz[2][0]=1;
+    //     matriz[3][0]=1;
+    //     matriz[4][0]=1;
+    //     matriz[5][0]=1;
+    //     matriz[6][0]=1;
+    //     System.out.println(mover(matriz,0,1));
 
- //            }
- //         }
- //       }    
- //    }
+            
+    // }
   
 }
 

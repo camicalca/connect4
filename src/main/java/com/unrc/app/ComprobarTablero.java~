@@ -112,58 +112,41 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
         }
 }
 
- private static Boolean DiagonalIzquierdo(int [][] matriz, int fila, int columna, int count){
+ //NO FUNCIONA
+private static Boolean recorridoDiagonalIzquierdo(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
         coincidencia = true;
-        int i;
-        int j;
-        i=fila;
-        j=columna;
-        //int count=0;
-        while ((i>=0)&&(j>=0)&&(coincidencia)&&(count<4)){
-            if(matriz[i-1][j+1]==matriz[fila][columna]){
-                coincidencia=true;
-                    i--;
-                    j++;
-                    count++;
-                    coincidencia=((coincidencia)&&(DiagonalIzquierdo(matriz,i,j,count)));
-
-            }
-        	if(matriz[i+1][j-1]==matriz[fila][columna]){
-        			coincidencia=true;
-        			i++;
-        			j--;
-        			count++;
-                    coincidencia=((coincidencia)&&(DiagonalIzquierdo(matriz,i,j,count)));
-        		}
-            if((matriz[i+1][j-1]!=matriz[fila][columna])&&((matriz[i-1][j+1]!=matriz[fila][columna]))){
-                coincidencia=false;
-            }
+        int filas;
+        int columnas;
+        filas = matriz.length;
+        columnas = matriz[0].length;
+        if ((fila+3)>=filas){
+            return false;
         }
-        return coincidencia;
-    }
-
-    private static Boolean DiagonalDerecho(int [][] matriz, int fila, int columna){
-        Boolean coincidencia;
-        coincidencia = true;
-        int i;
-        int j;
-        i=fila;
-        j=columna;
-        int count=0;
-        while ((i>=0)&&(j>=0)&&(coincidencia)&&(count<4)){
-        		if(matriz[i][j]==matriz[fila][columna]){
-        			coincidencia=true;
-        			i++;
-        			j++;
-        			count++;
-        		}else{
-        			coincidencia = false;
-        		}
+        else{
+            for (int i = 1; i<=3; i++){
+                coincidencia = (matriz[fila][columna]==matriz[fila-i][columna-i]) && coincidencia ;
+            }
+            return coincidencia;
         }
-        return coincidencia;
+}  
+//NO FUNCIONA
+private static Boolean recorridoDiagonalDerecho(int [][] matriz, int fila, int columna){
+    Boolean coincidencia;
+    coincidencia = true;
+    int filas;
+    int columnas;
+    filas = matriz.length;
+    columnas = matriz[0].length;
+    if ((columna+3)<columna){
+    for (int i=1;i<=3;i++){
+        coincidencia = coincidencia && (matriz[fila][columna]==matriz[fila+i][columna+i]);
     }
-oincidencia;
+    }
+    else{
+        coincidencia= false;
+    } 
+    return coincidencia;
 }
 
     

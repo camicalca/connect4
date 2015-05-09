@@ -28,7 +28,7 @@ public class ComprobarTablero {
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si a la izquierda del puto existen otros tres puntos iguales
+ * @return devuelve true si a la izquierda del punto existen otros tres puntos iguales
  */    
 private static Boolean recorridoHorizontalIzquierdo(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
@@ -48,7 +48,7 @@ private static Boolean recorridoHorizontalIzquierdo(int [][] matriz, int fila, i
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si a la derecha del puto existen otros tres puntos iguales
+ * @return devuelve true si a la derecha del punto existen otros tres puntos iguales
  */    
 private static Boolean recorridoHorizontalDerecho(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
@@ -72,7 +72,7 @@ private static Boolean recorridoHorizontalDerecho(int [][] matriz, int fila, int
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si arriba del puto existen otros tres puntos iguales
+ * @return devuelve true si arriba del punto existen otros tres puntos iguales
  */    
 private static Boolean recorridoVerticalSuperior(int [][] matriz, int fila, int columna){
         Boolean coincidencia;
@@ -92,15 +92,13 @@ private static Boolean recorridoVerticalSuperior(int [][] matriz, int fila, int 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia
  * @param columna posicion x del punto referencia
- * @return devuelve true si abajo del puto existen otros tres puntos iguales
+ * @return devuelve true si abajo del punto existen otros tres puntos iguales
  */  
 private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int columna){
-        Boolean coincidencia;
-        coincidencia = true;
-          int filas;
-        int columnas;
-        filas = matriz.length;
-        columnas = matriz[0].length;
+        Boolean coincidencia=true; 
+        int filas = matriz.length;
+        int columnas = matriz[0].length;
+      
         if ((fila+3)>=filas){
             return false;
         }
@@ -111,63 +109,98 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
             return coincidencia;
         }
 }
-
- private static Boolean DiagonalIzquierdo(int [][] matriz, int fila, int columna, int count){
-        Boolean coincidencia;
-        coincidencia = true;
-        int i;
-        int j;
-        i=fila;
-        j=columna;
-        //int count=0;
-        while ((i>=0)&&(j>=0)&&(coincidencia)&&(count<4)){
-            if(matriz[i-1][j+1]==matriz[fila][columna]){
-                coincidencia=true;
-                    i--;
-                    j++;
-                    count++;
-                    coincidencia=((coincidencia)&&(DiagonalIzquierdo(matriz,i,j,count)));
-
-            }
-        	if(matriz[i+1][j-1]==matriz[fila][columna]){
-        			coincidencia=true;
-        			i++;
-        			j--;
-        			count++;
-                    coincidencia=((coincidencia)&&(DiagonalIzquierdo(matriz,i,j,count)));
-        		}
-            if((matriz[i+1][j-1]!=matriz[fila][columna])&&((matriz[i-1][j+1]!=matriz[fila][columna]))){
-                coincidencia=false;
-            }
-        }
-        return coincidencia;
+  /**recorridoDiagonalSuperiorDerecho
+ * 
+ * @param matriz matriz sobre la cual se quiere razonar
+ * @param fila posicion y del punto referencia
+ * @param columna posicion x del punto referencia
+ * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ */  
+ private static Boolean recorridoDiagonalSuperiorDerecho(int [][] matriz, int fila, int columna){
+     Boolean coincidencia = true;
+     int filas = matriz.length;
+     int columnas = matriz[0].length;
+     if((columna+3<columnas) && (fila-3>=0)){
+         for(int i = 1;i<=3;i++){
+               coincidencia = (matriz[fila][columna]==matriz[fila-i][columna+i]) && coincidencia;
+         }
+         return coincidencia;
+     
+     }else{
+     
+         return false;
+     }
+       
+    }
+   /**recorridoDiagonalSuperiorIzquierdo
+ * 
+ * @param matriz matriz sobre la cual se quiere razonar
+ * @param fila posicion y del punto referencia
+ * @param columna posicion x del punto referencia
+ * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ */  
+ private static Boolean recorridoDiagonalSuperiorIzquierdo(int [][] matriz, int fila, int columna){
+     Boolean coincidencia = true;
+     if((columna-3>=0) && (fila-3>=0)){
+         for(int i = 1;i<=3;i++){
+               coincidencia = (matriz[fila][columna]==matriz[fila-i][columna-i]) && coincidencia;
+         }
+         return coincidencia;
+     
+     }else{
+     
+         return false;
+     }
+       
+    }
+    /**recorridoDiagonalInferiorIzquierdo
+ * 
+ * @param matriz matriz sobre la cual se quiere razonar
+ * @param fila posicion y del punto referencia
+ * @param columna posicion x del punto referencia
+ * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ */  
+ private static Boolean recorridoDiagonalInferiorIzquierdo(int [][] matriz, int fila, int columna){
+     Boolean coincidencia = true;
+     int filas = matriz.length;
+     int columnas = matriz[0].length;
+     if((columna-3>=0) && (fila+3<filas)){
+         for(int i = 1;i<=3;i++){
+               coincidencia = (matriz[fila][columna]==matriz[fila+i][columna-i]) && coincidencia;
+         }
+         return coincidencia;
+     
+     }else{
+     
+         return false;
+     }
+       
+    }
+     /**recorridoDiagonalInferiorDerecho
+ * 
+ * @param matriz matriz sobre la cual se quiere razonar
+ * @param fila posicion y del punto referencia
+ * @param columna posicion x del punto referencia
+ * @return devuelve true si abajo del punto existen otros tres puntos iguales
+ */  
+ private static Boolean recorridoDiagonalInferiorDerecho(int [][] matriz, int fila, int columna){
+     Boolean coincidencia = true;
+     int filas = matriz.length;
+     int columnas = matriz[0].length;
+     if((columna+3<columnas) && (fila+3<filas)){
+         for(int i = 1;i<=3;i++){
+               coincidencia = (matriz[fila][columna]==matriz[fila+i][columna+i]) && coincidencia;
+         }
+         return coincidencia;
+     
+     }else{
+     
+         return false;
+     }
+       
     }
 
-    private static Boolean DiagonalDerecho(int [][] matriz, int fila, int columna){
-        Boolean coincidencia;
-        coincidencia = true;
-        int i;
-        int j;
-        i=fila;
-        j=columna;
-        int count=0;
-        while ((i>=0)&&(j>=0)&&(coincidencia)&&(count<4)){
-        		if(matriz[i][j]==matriz[fila][columna]){
-        			coincidencia=true;
-        			i++;
-        			j++;
-        			count++;
-        		}else{
-        			coincidencia = false;
-        		}
-        }
-        return coincidencia;
-    }
-oincidencia;
-}
 
-    
-    
     
     public static Boolean ComprobarMatriz(int [][] matriz){
         //Guardo el tamaño de la matriz
@@ -189,21 +222,40 @@ oincidencia;
         }
         return coincidencia;
     }
+ //    public static void toString(int[][] matriz){
+ //      for (int x=0; x < matriz.length; x++) {
+ //        System.out.print("F["+x+"]"+" |");
+ //      for (int y=0; y < matriz[x].length; y++) {
+ //        System.out.print (matriz[x][y]);
+ //      if (y!=matriz[x].length-1) System.out.print("\t");
+ //      }
+ //    System.out.println("|");
+ //    }
+ //  }
  
- /** método main para testeo
-  * @param args 
-  */
-/*
-    public static void main(String[] args){
-        Object[][] matriz;
-        matriz = new Object[7][7];
-        matriz[4][3]="AZUL";//punto referencia
-        matriz[2][3]="AZUL";
-        matriz[1][3]="AZUL";
-        matriz[0][3]="AZUL";
-       
-    }
-  */  
+ // /** método main para testeo
+ //  * @param args 
+ //  */
+ //    public static void main(String[] args){
+ //        int[][] matriz;
+ //        matriz = new int[7][7];
+ //        matriz[0][0]=1;//punto referencia
+ //        matriz[1][1]=1;
+ //        matriz[2][2]=1;
+ //        matriz[3][3]=1;
+ //        matriz[4][4]=1;
+ //        matriz[5][5]=1;
+ //        toString(matriz);
+ //        for(int i = 0; i<matriz.length;i++){
+ //          for(int j = 0; j<matriz[0].length;j++){
+ //            if(recorridoDiagonalInferiorDerecho(matriz,i,j) && matriz[i][j]!=0){
+ //              System.out.println("fila: "+i+" columna: "+j);
+
+ //            }
+ //         }
+ //       }    
+ //    }
+  
 }
 
 

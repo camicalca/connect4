@@ -10,7 +10,16 @@ package com.unrc.app;
  * @author santiago
  */
 public class Game {
-    User player1 = new User();
-    User player2 = new User();
+   private  User player1;
+   private  User player2;
+   private Tablero tabla;
     
+    
+    public Game(User player1,User player2,Tablero tabla){
+    this.player1 = player1;
+    this.player2 = player2;
+    this.tabla = tabla;
+    
+    
+    }
 }

@@ -6,19 +6,45 @@ package com.unrc.app;
  * @author santiago
  */
 public class ComprobarTablero {
-    /*  METODOS PARA COMPROBAR SI UN PUNTO DE LA MATRIZ FORMA CUATRO EN LINEA EN TODOS LOS SENTIDOS
-    TESTS:
-    recorridoHorizontalIzquierdo: OK
-    recorridoHorizontalDerecho: OK
-    recorridoVerticalSuperior: OK
-    recorridoVerticalInferior: OK
-    recorridoDiagonalSuperiorDerecho:OK
-    recorridoDiagonalInferiorDerecho:OK
-    recorridoDiagonalSuperiorIzquierdo:OK
-    recorridoDiagonalInferiorIzquierdo:OK
-   */ 
+  /*
+    Esta clase provee métodos para realizar todas las comprobaciones respecto al tablero de juego
+    */
 
-/**recorridoHorizontalIzquierdo
+    
+    /**isEmpty
+ * 
+ * @param matriz matriz sobre la cual se quiere razonar
+ * @param fila posicion y del punto referencia
+ * @param columna posicion x del punto referencia
+ * @return devuelve true la posicion es 0
+ */      
+    
+    
+    
+public static Boolean isEmpty(int[][] matriz,int fila,int columna){
+    return matriz[fila][columna]==0;
+}
+public static Boolean mover(int[][] matriz,int columna,int jugador){
+    Boolean control=false;
+    for(int i=matriz.length;i>=0 && !control;i--){
+        if(matriz[i][columna]==0){
+               matriz[i][columna]=jugador;
+               control=true;
+        }
+    
+    }
+    return control;
+ }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**recorridoHorizontalIzquierdo
  * 
  * @param matriz matriz sobre la cual se quiere razonar
  * @param fila posicion y del punto referencia

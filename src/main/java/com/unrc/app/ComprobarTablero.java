@@ -94,10 +94,8 @@ private static Boolean recorridoVerticalSuperior(int [][] matriz, int fila, int 
  * @return devuelve true si abajo del punto existen otros tres puntos iguales
  */  
 private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int columna){
-        Boolean coincidencia=true; 
+        Boolean coincidencia = true; 
         int filas = matriz.length;
-        int columnas = matriz[0].length;
-      
         if ((fila+3)>=filas){
             return false;
         }
@@ -117,7 +115,6 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  */  
  private static Boolean recorridoDiagonalSuperiorDerecho(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
-     int filas = matriz.length;
      int columnas = matriz[0].length;
      if((columna+3<columnas) && (fila-3>=0)){
          for(int i = 1;i<=3;i++){
@@ -162,7 +159,6 @@ private static Boolean recorridoVerticalInferior(int [][] matriz, int fila, int 
  private static Boolean recorridoDiagonalInferiorIzquierdo(int [][] matriz, int fila, int columna){
      Boolean coincidencia = true;
      int filas = matriz.length;
-     int columnas = matriz[0].length;
      if((columna-3>=0) && (fila+3<filas)){
          for(int i = 1;i<=3;i++){
                coincidencia = (matriz[fila][columna]==matriz[fila+i][columna-i]) && coincidencia;

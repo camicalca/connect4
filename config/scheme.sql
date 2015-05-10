@@ -17,3 +17,17 @@ CREATE TABLE users(
    
 );
 
+ DROP TABLE IF EXISTS games;
+  CREATE TABLE games(
+	id INT(11) not null auto_increment primary key,
+  	user_id INT(11) ,//jugardor1
+  	user_id INT(11),//jugador2
+  	user_id INT(11) //ganador
+   
+);
+DROP TABLE IF EXISTS cells;
+ CREATE TABLE cells 
+ (id integer not null primary key auto_increment,
+ fila integer,
+ columna integer);
+

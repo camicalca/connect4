@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
     id INT(11) NOT NULL AUTO_INCREMENT,
+    pass varchar(45),
     email VARCHAR(60) UNIQUE,
     first_name VARCHAR(56),
     last_name VARCHAR(56),
@@ -23,11 +24,13 @@ CREATE TABLE users(
   	user_id INT(11) ,//jugardor1
   	user_id INT(11),//jugador2
   	user_id INT(11) //ganador
+	dateinit date,
+	datefinish date
    
 );
 DROP TABLE IF EXISTS cells;
  CREATE TABLE cells 
  (id integer not null primary key auto_increment,
- fila integer,
- columna integer);
+ row integer,
+ column integer);
 

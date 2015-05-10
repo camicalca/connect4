@@ -12,12 +12,12 @@ package com.unrc.app;
 public class Game {
    private  User player1;
    private  User player2;
-   private Tablero tabla;
+   private Board board;
     
     
-    public Game(User player1,User player2,Tablero tabla){
+    public Game(User player1,User player2,Board board){
         this.player1 = player1;
         this.player2 = player2;
-        this.tabla = tabla;
+        this.board = board;
     }
 }

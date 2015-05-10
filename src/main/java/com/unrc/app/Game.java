@@ -16,10 +16,8 @@ public class Game {
     
     
     public Game(User player1,User player2,Tablero tabla){
-    this.player1 = player1;
-    this.player2 = player2;
-    this.tabla = tabla;
-    
-    
+        this.player1 = player1;
+        this.player2 = player2;
+        this.tabla = tabla;
     }
 }

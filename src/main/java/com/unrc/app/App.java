@@ -15,11 +15,14 @@ public class App
 
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
 
-        User u = new User();
-        u.set("first_name", "Santi");
-        u.save();
-        Rank r = new Rank();
-        u.add(r);
+        User u1 = new User();
+        u1.set("first_name", "Santi");
+        u1.save();
+        User u2 = new User();
+        u2.set("first_name", "Agustin");
+        u2.save();
+        
+        //u1.add(r);
       
        
 

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package com.unrc.app;
+import org.javalite.activejdbc.Model;
+
 
 /**
  *
@@ -14,6 +16,6 @@ package com.unrc.app;
 @BelongsTo(foreignKeyName="player2_id",parent=User.class),
 @BelongsTo(foreignKeyName="win_id",parent=User.class) 
 }) 
-public class Game {
+public class Game extends Model {
  
 }

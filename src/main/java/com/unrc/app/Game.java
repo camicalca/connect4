@@ -5,6 +5,8 @@
  */
 package com.unrc.app;
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
 
 
 /**

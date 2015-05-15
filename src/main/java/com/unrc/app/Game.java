@@ -9,15 +9,11 @@ package com.unrc.app;
  *
  * @author santiago
  */
+@BelongsToParents({ 
+@BelongsTo(foreignKeyName="player1_id",parent=User.class), 
+@BelongsTo(foreignKeyName="player2_id",parent=User.class),
+@BelongsTo(foreignKeyName="win_id",parent=User.class) 
+}) 
 public class Game {
-   private  User player1;
-   private  User player2;
-   private Board board;
-    
-    
-    public Game(User player1,User player2,Board board){
-        this.player1 = player1;
-        this.player2 = player2;
-        this.board = board;
-    }
+ 
 }

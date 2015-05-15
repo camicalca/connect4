@@ -21,9 +21,9 @@ CREATE TABLE users(
  DROP TABLE IF EXISTS games;
   CREATE TABLE games(
 	id INT(11) not null auto_increment primary key,
-  	user_id INT(11) ,//jugardor1
-  	user_id INT(11),//jugador2
-  	user_id INT(11) //ganador
+  	player1_id INT(11) ,
+  	player2_id INT(11),
+  	win_id INT(11) 
 	dateinit date,
 	datefinish date
    

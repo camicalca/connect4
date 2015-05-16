@@ -1,12 +1,13 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
-    id INT(11) NOT NULL AUTO_INCREMENT,
+ 
+    username varchar(45) not null primary key,
     pass varchar(45),
     email VARCHAR(60) UNIQUE,
     first_name VARCHAR(56),
-    last_name VARCHAR(56),
-  CONSTRAINT users_pk PRIMARY KEY (id)
+    last_name VARCHAR(56)
+ 
 );
 
  DROP TABLE IF EXISTS ranks;

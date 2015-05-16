@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello world!!!!!!" );
+      
 
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
 
@@ -21,7 +21,7 @@ public class App
         User u2 = new User();
         u2.set("first_name", "Agustin");
         u2.save();
-        
+        System.out.println(UserChecks.exists(u2));
         //u1.add(r);
       
        

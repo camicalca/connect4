@@ -20,7 +20,8 @@ public class MenuPrincipal {
             System.out.println("2---->Ver ranking de usuarios");
             System.out.println("3---->Registrar usuario");
             System.out.println("4---->Eliminar usuario");
-            System.out.println("5---->Para salir");
+            System.out.println("5---->Reanudar partida guardada");
+            System.out.println("6---->Para salir");
             System.out.println("================================");
         while(opcion!=1 && opcion!=2 && opcion!=3 && opcion!=4 && opcion!=5  ){
            entrada = new Scanner(System.in);
@@ -28,7 +29,7 @@ public class MenuPrincipal {
            
         }
         switch (opcion) {
-			case 1: Jugar();
+			case 1: jugar();
 				break;
 			case 2: verRanking();
 				break;
@@ -36,11 +37,18 @@ public class MenuPrincipal {
 				break;
                         case 4: eliminarUsuario();
 				break;
-			case 5: System.out.println("SALIENDO");
+                        case 5: reanudarPartida();
+				break;
+			case 6: System.out.println("SALIENDO...");
 				break;
 		}
 	}
-    private static void Jugar(){}
+    private static void jugar(){
+        Board tablero = new Board();
+        NewGame.jugar(tablero);
+    
+    }
+    private static void reanudarPartida(){}
     private static void verRanking(){}
     private static void registrarUsuario(){}
     private static void eliminarUsuario(){}

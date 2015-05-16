@@ -10,15 +10,12 @@ import java.util.Scanner;
  * @author santiago
  */
 public class NewGame {
-    private Board tablero ;
-    
-    public NewGame(){
-        Board tablero = new Board();
-    }
+   
     
     
-    public void jugar(){
+    public static void jugar(Board tablero){
         int counter = 0;
+        System.out.println(tablero==null);
         tablero.toStringB();
         int player=1;
         while (!CheckBoard.checkBoard(tablero)){

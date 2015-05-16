@@ -1,14 +1,15 @@
 DROP TABLE IF EXISTS users;
-
 CREATE TABLE users(
- 
-    username varchar(45) not null primary key,
+   id int(11) not null auto_increment  primary key,
+    username varchar(45) UNIQUE,
     pass varchar(45),
     email VARCHAR(60) UNIQUE,
     first_name VARCHAR(56),
     last_name VARCHAR(56)
+
  
 );
+
 
  DROP TABLE IF EXISTS ranks;
   CREATE TABLE ranks(

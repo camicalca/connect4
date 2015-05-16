@@ -11,7 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-      
+      /*
 
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
        
@@ -31,5 +31,7 @@ public class App
 
 
         Base.close();
+        */
+        MenuPrincipal.mostrarMenuPrincipal();
     }
 }

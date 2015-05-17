@@ -49,7 +49,19 @@ public class MenuPrincipal {
     
     }
     private static void reanudarPartida(){}
-    private static void verRanking(){}
+    private static void verRanking(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Ingrese el id del usuario a buscar su rank");
+        int usuario=in.nextInt();
+        Rank p = Rank.findById(usuario);
+        /*
+        Find by id
+        This is self-explanatory. If you know the ID, it is easy to get the model 
+        that represents this record.
+        Person p = Person.findById(1);
+        */
+        
+    }
     private static void registrarUsuario(){}
     private static void eliminarUsuario(){}
         

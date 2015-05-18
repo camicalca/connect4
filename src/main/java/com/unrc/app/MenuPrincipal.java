@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.unrc.app;
+import java.util.List;
 import java.util.Scanner;
 /**
  *
@@ -44,22 +45,26 @@ public class MenuPrincipal {
 		}
 	}
     private static void jugar(){
+        for (int i=1;i<3;i++){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Ingrese el apelido del usuario "+i);
+        String last_name = reader.next();
+        System.out.println("Ingrese el nombre del usuario "+i);
+        String first_name = reader.next();
+        System.out.println("Ingrese el nombre de Usuario del usuario "+i);
+        String username = reader.next();
+        System.out.println("Ingrese una clave del usuario "+i);
+        String password = reader.next();
+        System.out.println("Ingrese el e mail del usuario "+i);
+        String email = reader.next();
+        User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
+        }
         Board tablero = new Board();
         NewGame.jugar(tablero);
     
     }
     private static void reanudarPartida(){}
     private static void verRanking(){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Ingrese el id del usuario a buscar su rank");
-        int usuario=in.nextInt();
-        Rank p = Rank.findById(usuario);
-        /*
-        Find by id
-        This is self-explanatory. If you know the ID, it is easy to get the model 
-        that represents this record.
-        Person p = Person.findById(1);
-        */
         
     }
     private static void registrarUsuario(){}

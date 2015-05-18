@@ -12,11 +12,17 @@ package com.unrc.app;
 public class UserChecks {
     
 
-    public static User newUser(String last_name,String first_name,String username,String password,String email){
+    public static User newUser(String last_name,String first_name,String email){
         User u = new User();
-        u.set("username",username,"last_name",last_name,"pass",password,"email",email,"first_name",first_name);
+        System.out.println("1");
+        System.out.println("1"+first_name+last_name+email);
+        u.set("first_name",first_name);
+        u.set("last_name",last_name);
+        u.set("email",email);
+        System.out.println("2");
         if (!u.exists()){
-            u.save();
+            System.out.println("3");
+            u.saveIt();
             return u;
         }else{
             return null;

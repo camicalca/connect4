@@ -51,13 +51,11 @@ public class MenuPrincipal {
         String last_name = reader.next();
         System.out.println("Ingrese el nombre del usuario "+i);
         String first_name = reader.next();
-        System.out.println("Ingrese el nombre de Usuario del usuario "+i);
-        String username = reader.next();
-        System.out.println("Ingrese una clave del usuario "+i);
-        String password = reader.next();
         System.out.println("Ingrese el e mail del usuario "+i);
         String email = reader.next();
-        User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
+        UserChecks usuario = null;
+        usuario.newUser(last_name,first_name,email);
+        //User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
         }
         Board tablero = new Board();
         NewGame.jugar(tablero);

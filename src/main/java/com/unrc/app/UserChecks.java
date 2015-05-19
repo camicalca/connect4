@@ -16,7 +16,7 @@ public class UserChecks {
     
 
     public static void newUser(String last_name,String first_name,String email,String username){
-        List<User> list = User.where("username = "+username);
+        List<User> list = User.where("username =?",username);
         if (list.isEmpty()){
             User u = new User();
             System.out.println("1");

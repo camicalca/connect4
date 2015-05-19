@@ -13,21 +13,25 @@ public class NewGame {
    
     
     
-    public static void jugar(Board tablero){
+    public static void jugar(Board tablero,String player1, String player2){
         int counter = 0;
         System.out.println(tablero==null);
         tablero.toStringB();
         int player=1;
+        String juega = null;
         while (!CheckBoard.checkBoard(tablero)){
-            System.out.println("Ingrese la columna 0-5");
-            Scanner scan = new Scanner (System.in);
-            int c = scan.nextInt();
             if (counter%2==0){
                 player=1;
+                juega=player1;
             }
             else{
                 player = 2;
+                juega=player2;
             }
+            System.out.println("Ingrese la columna el usuario "+juega);
+            Scanner scan = new Scanner (System.in);
+            int c = scan.nextInt();
+            
             CheckBoard.move(tablero,c,player);
             counter++;
             System.out.println("==================");
@@ -35,7 +39,7 @@ public class NewGame {
 
 
         }
-        System.out.println("El jugador "+player+" gano el juego");
+        System.out.println("El jugador "+juega+" gano el juego");
 
     
     

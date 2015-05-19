@@ -45,6 +45,8 @@ public class MenuPrincipal {
 		}
 	}
     private static void jugar(){
+        String player1 = null;
+        String player2 = null;
         for (int i=1;i<3;i++){
         Scanner reader = new Scanner(System.in);
         System.out.println("Ingrese el apelido del usuario "+i);
@@ -56,10 +58,16 @@ public class MenuPrincipal {
         System.out.println("Ingrese el username del usuario "+i);
         String username = reader.next();
         UserChecks.newUser(last_name,first_name,email,username);
-        //User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
+        if (i==1){
+            player1=username;
+        }else{
+            player2=username;
+            }
         }
+        //User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
+        
         Board tablero = new Board();
-        NewGame.jugar(tablero);
+        NewGame.jugar(tablero,player1,player2);
     
     }
     private static void reanudarPartida(){}

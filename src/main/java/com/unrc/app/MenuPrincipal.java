@@ -53,8 +53,9 @@ public class MenuPrincipal {
         String first_name = reader.next();
         System.out.println("Ingrese el e mail del usuario "+i);
         String email = reader.next();
-        UserChecks usuario = null;
-        usuario.newUser(last_name,first_name,email);
+        System.out.println("Ingrese el username del usuario "+i);
+        String username = reader.next();
+        UserChecks.newUser(last_name,first_name,email,username);
         //User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
         }
         Board tablero = new Board();

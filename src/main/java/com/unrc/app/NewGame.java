@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.unrc.app;
+import java.util.List;
 import java.util.Scanner;
 /**
  *
@@ -39,9 +40,26 @@ public class NewGame {
 
 
         }
+        //Consulatar Rank----->
         System.out.println("El jugador "+juega+" gano el juego");
-
-    
+        List<User> list = User.where("username =?",juega);
+        User p = list.get(0);
+        System.out.println("list"+p.getIdName());
+        if (list.isEmpty()){
+            System.out.println("Usuario ganador no registrado");
+        }else{
+            Rank u = new Rank();
+            System.out.println("Rank");
+            /* CONSULTAR */
+            u.set("user_id",list.get(1));
+            u.set("position",0);
+            u.set("games_won",0);
+            System.out.println("2");
+            if (!u.exists()){
+                System.out.println("3");
+                u.save();
+            }
+        }   
     
     
     

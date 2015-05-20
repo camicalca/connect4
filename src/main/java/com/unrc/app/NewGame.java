@@ -40,7 +40,7 @@ public class NewGame {
 
 
         }
-        //Consulatar Rank----->
+        //Consulatar Rank------>
         System.out.println("El jugador "+juega+" gano el juego");
         List<User> list = User.where("username =?",juega);
         User p = list.get(0);

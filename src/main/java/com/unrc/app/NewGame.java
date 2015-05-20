@@ -43,17 +43,18 @@ public class NewGame {
         //Consulatar Rank------>
         System.out.println("El jugador "+juega+" gano el juego");
         List<User> list = User.where("username =?",juega);
-        User p = list.get(0);
-        System.out.println("list"+p.getIdName());
+        User u = list.get(0);
+        System.out.println("list"+u.getIdName());
         if (list.isEmpty()){
             System.out.println("Usuario ganador no registrado");
         }else{
-            Rank u = new Rank();
+            Rank r = new Rank();
             System.out.println("Rank");
             /* CONSULTAR */
-            u.set("user_id",list.get(1));
-            u.set("position",0);
-            u.set("games_won",0);
+            r.set("user_id",list.get(1));
+            r.set("position",0);
+            r.set("games_won",0);
+            u.add(r);
             System.out.println("2");
             if (!u.exists()){
                 System.out.println("3");

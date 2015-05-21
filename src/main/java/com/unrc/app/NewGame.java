@@ -20,7 +20,12 @@ public class NewGame {
         tablero.toStringB();
         int player=1;
         String juega = null;
-        while (!CheckBoard.checkBoard(tablero)){
+        int countfich=0;
+        int columnas=tablero.getMatrix()[0].length;
+        int filas=tablero.getMatrix().length;
+        System.out.println(filas*columnas);
+        
+        while ((!CheckBoard.checkBoard(tablero))&&(countfich<filas*columnas)){
             if (counter%2==0){
                 player=1;
                 juega=player1;
@@ -32,36 +37,42 @@ public class NewGame {
             System.out.println("Ingrese la columna el usuario "+juega);
             Scanner scan = new Scanner (System.in);
             int c = scan.nextInt();
-            
+            countfich++;
             CheckBoard.move(tablero,c,player);
             counter++;
             System.out.println("==================");
             tablero.toStringB();
-
-
         }
-        //Consulatar Rank------>
-        System.out.println("El jugador "+juega+" gano el juego");
-        List<User> list = User.where("username =?",juega);
-        User u = list.get(0);
-        System.out.println("list"+u.getIdName());
-        if (list.isEmpty()){
-            System.out.println("Usuario ganador no registrado");
-        }else{
-            Rank r = new Rank();
-            System.out.println("Rank");
-            /* CONSULTAR */
-            r.set("user_id",list.get(1));
-            r.set("position",0);
-            r.set("games_won",0);
-            u.add(r);
-            System.out.println("2");
-            if (!u.exists()){
-                System.out.println("3");
-                u.save();
-            }
-        }   
-    
+            if(countfich==filas*columnas){
+                System.out.println("Juego Empatado");
+            }else{
+                //Consulatar Rank------>
+                System.out.println("El jugador "+juega+" gano el juego");
+                List<User> list = User.where("username =?",juega);
+                List<Rank> list1;
+                list1 = Rank.where("user_id =?",list.get(0));
+                User u = list.get(0);
+                System.out.println("list"+u.getIdName());
+                if (list1.isEmpty()){
+                    Rank r = new Rank();
+                    System.out.println("Creando nuevo Rak");
+                    //r.set("user_id",list.get(1));
+                    r.set("games_won",1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+
+                }else{
+                    System.out.println("Modificando Rank");
+                    Rank r = new Rank();
+                    r.set("games_won",list1.get(3));
+                    u.add(r);
+                    r.save();
+                    u.save();
+                } 
+            
+        }
+
     
     
     }

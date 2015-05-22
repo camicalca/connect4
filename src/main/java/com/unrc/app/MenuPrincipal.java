@@ -71,8 +71,12 @@ public class MenuPrincipal {
        
     
     }
-    private static void reanudarPartida(){}
+    private static void reanudarPartida(){
+        
+    
+    }
     private static void verRanking(){
+        
         
         
     }

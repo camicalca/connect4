@@ -74,6 +74,7 @@ public class NewGame {
         }
          
             Game game = new Game();
+     
             List<User> ulist1 = User.where("username=?",player1);
             List<User> ulist2 = User.where("username=?",player2);
             game.set("player1_id",ulist1.get(0).getId());

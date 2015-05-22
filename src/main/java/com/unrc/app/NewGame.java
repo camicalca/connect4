@@ -80,7 +80,6 @@ public class NewGame {
             List<User> ulist2 = User.where("username=?",player2);
             game.set("player1_id",ulist1.get(0).getId());
             game.set("player2_id",ulist2.get(0).getId());
-            
             game.save();
             
             

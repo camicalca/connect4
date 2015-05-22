@@ -1,3 +1,7 @@
+DROP SCHEMA IF EXISTS connect4_development;
+CREATE SCHEMA connect4_development;
+USE connect4_development;
+
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
    id int(11) not null auto_increment  primary key,
@@ -14,7 +18,6 @@ CREATE TABLE users(
   CREATE TABLE ranks(
   id INT(11) not null auto_increment primary key,
     user_id INT(11) ,
-    position INT(11),
     games_won INT(11) 
    
 );
@@ -33,4 +36,6 @@ DROP TABLE IF EXISTS cells;
  CREATE TABLE cells 
  (id integer not null primary key auto_increment,
  filas integer,
- columnas integer);
+ columnas integer
+ game_id integer 	
+);

@@ -14,7 +14,6 @@ CREATE TABLE users(
   CREATE TABLE ranks(
   id INT(11) not null auto_increment primary key,
     user_id INT(11) ,
-    position INT(11),
     games_won INT(11) 
    
 );

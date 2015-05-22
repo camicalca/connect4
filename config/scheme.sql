@@ -35,7 +35,8 @@ CREATE TABLE users(
 DROP TABLE IF EXISTS cells;
  CREATE TABLE cells 
  (id integer not null primary key auto_increment,
- filas integer,
- columnas integer
+ fila integer,
+ columna integer,
+ valor integer,
  game_id integer 	
 );

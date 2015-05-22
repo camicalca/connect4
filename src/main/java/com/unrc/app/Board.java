@@ -25,7 +25,11 @@ public class Board {
             }
         }
     }
-
+    public int getNumberOfCells(){
+        return (matrix[0].length)*(matrix.length);
+       
+    
+    }
     public int[][] getMatrix() {
         return matrix;
     }  

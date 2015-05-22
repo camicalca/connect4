@@ -68,6 +68,7 @@ public class MenuPrincipal {
         
         Board tablero = new Board();
         NewGame.jugar(tablero,player1,player2);
+       
     
     }
     private static void reanudarPartida(){}

@@ -16,14 +16,12 @@ public class NewGame {
     
     public static void jugar(Board tablero,String player1, String player2){
         int counter = 0;
-        System.out.println(tablero==null);
         tablero.toStringB();
         int player=1;
         String juega = null;
         int countfich=0;
         int columnas=tablero.getMatrix()[0].length;
         int filas=tablero.getMatrix().length;
-        System.out.println(filas*columnas);
         
         while ((!CheckBoard.checkBoard(tablero))&&(countfich<filas*columnas)){
             if (counter%2==0){
@@ -82,8 +80,36 @@ public class NewGame {
             game.set("player2_id",ulist2.get(0).getId());
             game.save();
             
-            
-    
-    
-    }
+      }
+      public static void saveGame(Board tablero,Integer idgame){
+        int columnas=tablero.getMatrix()[0].length;
+        int filas=tablero.getMatrix().length;
+      
+          int index=0;
+            Cell[] arreglo= new Cell[tablero.getNumberOfCells()];
+            for(int i = 0; i<filas;i++){
+                for(int j = 0; j<columnas;j++){
+                    System.out.println("entre for");
+                    arreglo[index]=new Cell();
+                    arreglo[index].set("fila",i,"columna",j,"valor",tablero.getCell(i,j),"game_id",1);
+                    arreglo[index].save();
+                    index++;
+                }
+            }
+      }
+      public static Board loadBoard(Integer gameid){
+          List<Cell> cellList = Cell.where("game_id=?",gameid);
+          Board tableroCargado = new Board();
+          int index = 0;
+          while(index<cellList.size()){
+              tableroCargado.setCell(cellList.get(index).getInteger("fila"),cellList.get(index).getInteger("columna"), cellList.get(index).getInteger("valor"));
+              index++;
+          }
+          return tableroCargado;
+      
+      
+      
+      }
+        
+
 }

@@ -50,8 +50,9 @@ public class NewGame {
                 System.out.println("El jugador "+juega+" gano el juego");
                 List<User> list = User.where("username =?",juega);
                 List<Rank> list1;
-                list1 = Rank.where("user_id =?",list.get(0));
                 User u = list.get(0);
+                list1 = Rank.where("user_id =?",u.getId());
+                System.out.println(u.getId());
                 System.out.println("list"+u.getIdName());
                 if (list1.isEmpty()){
                     Rank r = new Rank();
@@ -64,8 +65,8 @@ public class NewGame {
 
                 }else{
                     System.out.println("Modificando Rank");
-                    Rank r = new Rank();
-                    r.set("games_won",list1.get(3));
+                    Rank r = list1.get(0);
+                    r.set("games_won",r.getInteger("games_won")+1);
                     u.add(r);
                     r.save();
                     u.save();

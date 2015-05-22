@@ -24,7 +24,7 @@ public class MenuPrincipal {
             System.out.println("5---->Reanudar partida guardada");
             System.out.println("6---->Para salir");
             System.out.println("================================");
-        while(opcion!=1 && opcion!=2 && opcion!=3 && opcion!=4 && opcion!=5  ){
+        while(opcion!=1 && opcion!=2 && opcion!=3 && opcion!=4 && opcion!=5 && opcion!=6  ){
            entrada = new Scanner(System.in);
            opcion = entrada.nextInt();
            
@@ -72,6 +72,7 @@ public class MenuPrincipal {
     }
     private static void reanudarPartida(){}
     private static void verRanking(){
+        
         
     }
     private static void registrarUsuario(){}

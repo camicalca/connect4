@@ -32,7 +32,7 @@ public class NewGame {
                 player = 2;
                 juega=player2;
             }
-            System.out.println("Ingrese la columna el usuario "+juega);
+            System.out.println("TURNO DE: "+juega);
             Scanner scan = new Scanner (System.in);
             int c = scan.nextInt();
             countfich++;
@@ -42,10 +42,11 @@ public class NewGame {
             tablero.toStringB();
         }
             if(countfich==filas*columnas){
+                //hubo un empate
                 System.out.println("Juego Empatado");
            
             }else{
-                //Consulatar Rank------>
+                //Hubo un ganador
                 System.out.println("El jugador "+juega+" gano el juego");
                 List<User> list = User.where("username =?",juega);
                 List<Rank> list1;

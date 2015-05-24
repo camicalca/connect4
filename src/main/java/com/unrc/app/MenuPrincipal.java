@@ -18,11 +18,10 @@ public class MenuPrincipal {
             System.out.println("================================");
             System.out.println("MENU PRINCIPAL");
             System.out.println("1---->Jugar");
-            System.out.println("2---->Ver ranking de usuarios");
-            System.out.println("3---->Registrar usuario");
-            System.out.println("4---->Eliminar usuario");
-            System.out.println("5---->Reanudar partida guardada");
-            System.out.println("6---->Para salir");
+            System.out.println("2---->Ver stats de un usuario");
+            System.out.println("3---->Eliminar usuario");
+            System.out.println("4---->Reanudar partida guardada");
+            System.out.println("5---->Para salir");
             System.out.println("================================");
         while(opcion!=1 && opcion!=2 && opcion!=3 && opcion!=4 && opcion!=5 && opcion!=6  ){
            entrada = new Scanner(System.in);
@@ -34,13 +33,11 @@ public class MenuPrincipal {
 				break;
 			case 2: verRanking();
 				break;
-			case 3: registrarUsuario();
+                        case 3: eliminarUsuario();
 				break;
-                        case 4: eliminarUsuario();
+                        case 4: reanudarPartida();
 				break;
-                        case 5: reanudarPartida();
-				break;
-			case 6: System.out.println("SALIENDO...");
+			case 5: System.out.println("SALIENDO...");
 				break;
 		}
 	}
@@ -49,7 +46,7 @@ public class MenuPrincipal {
         String player2 = null;
         for (int i=1;i<3;i++){
         Scanner reader = new Scanner(System.in);
-        System.out.println("Ingrese el apelido del usuario "+i);
+        System.out.println("Ingrese el apellido del usuario "+i);
         String last_name = reader.next();
         System.out.println("Ingrese el nombre del usuario "+i);
         String first_name = reader.next();
@@ -64,24 +61,66 @@ public class MenuPrincipal {
             player2=username;
             }
         }
-        //User newUser = UserChecks.newUser(last_name,first_name, username, password, email);
         
         Board tablero = new Board();
-        NewGame.jugar(tablero,player1,player2);
+        NewGame.play(tablero,player1,player2);
        
     
     }
     private static void reanudarPartida(){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Ingrese el id del juego guardado");
+        Integer idJuego = reader.nextInt();
+        List<Game> lJuego = Game.where("id=?",idJuego);
+        List<Cell> lCell = Cell.where("game_id=?",idJuego);
+        if (lJuego.isEmpty() || lCell.isEmpty()){
+            
+             System.out.println("ID NO VALIDO");
+            
+        }else{
+            Integer idUser1 = lJuego.get(0).getInteger("player1_id");
+            List<User> user1 = User.where("id=?",idUser1);
+            
+            
+            Integer idUser2 = lJuego.get(0).getInteger("player2_id");
+            List<User> user2 = User.where("id=?",idUser2);
+            
+            String player1 = user1.get(0).getString("username");
+            String player2 = user2.get(0).getString("username");
+            Board tableroGuardado = NewGame.loadBoard(idJuego);
+            NewGame.play(tableroGuardado, player1, player2);
+            
+        }
+        
         
     
     }
     private static void verRanking(){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Ingrese el username del usuario");
+        String username = reader.next();
+        List<User> userL = User.where("username=?",username);
+        if(userL.isEmpty()){
+            System.out.println("Usuario no encontrado");
+        }else{
+            List<Rank> rankl = Rank.where("user_id=?",userL.get(0).getInteger("id"));
+            System.out.println("Juegos ganados del usuario "+username+": "+rankl.get(0).getInteger("games_won"));
+            
+        
+        
+        }
         
         
         
     }
-    private static void registrarUsuario(){}
-    private static void eliminarUsuario(){}
+    private static void eliminarUsuario(){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Ingrese el username del usuario a eliminar (Borra en cascada)");
+        String username = reader.next();
+        User usuario = User.findFirst("username=?",username);
+        usuario.deleteCascade();
+    
+    }
         
         
         

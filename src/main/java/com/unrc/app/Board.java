@@ -25,6 +25,13 @@ public class Board {
             }
         }
     }
+    public int getRows(){
+        return matrix.length;
+    }
+    public int getColumns(){
+        return matrix[0].length;
+    }
+    
     public int getNumberOfCells(){
         return (matrix[0].length)*(matrix.length);
        

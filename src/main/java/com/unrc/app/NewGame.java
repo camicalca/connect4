@@ -14,16 +14,16 @@ public class NewGame {
    
     
     
-    public static void jugar(Board tablero,String player1, String player2){
+    public static void play(Board tablero,String player1, String player2){
         int counter = 0;
         tablero.toStringB();
         int player=1;
         String juega = null;
         int countfich=0;
-        int columnas=tablero.getMatrix()[0].length;
-        int filas=tablero.getMatrix().length;
+        int columnas=tablero.getColumns();
+        int filas=tablero.getRows();
         
-        while ((!CheckBoard.checkBoard(tablero))&&(countfich<filas*columnas)){
+        while ((!BoardTools.checkBoard(tablero))&&(countfich<filas*columnas)){
             if (counter%2==0){
                 player=1;
                 juega=player1;
@@ -36,7 +36,7 @@ public class NewGame {
             Scanner scan = new Scanner (System.in);
             int c = scan.nextInt();
             countfich++;
-            CheckBoard.move(tablero,c,player);
+            BoardTools.move(tablero,c,player);
             counter++;
             System.out.println("==================");
             tablero.toStringB();
@@ -44,10 +44,19 @@ public class NewGame {
             if(countfich==filas*columnas){
                 //hubo un empate
                 System.out.println("Juego Empatado");
+                Game game = new Game();
+     
+                 List<User> ulist1 = User.where("username=?",player1);
+                 List<User> ulist2 = User.where("username=?",player2);
+                 game.set("player1_id",ulist1.get(0).getId());
+                 game.set("player2_id",ulist2.get(0).getId());
+                 game.set("win_id",null);
+                 game.save();
            
             }else{
                 //Hubo un ganador
                 System.out.println("El jugador "+juega+" gano el juego");
+                String ganador = juega;
                 List<User> list = User.where("username =?",juega);
                 List<Rank> list1;
                 User u = list.get(0);
@@ -55,6 +64,7 @@ public class NewGame {
                 System.out.println(u.getId());
                 System.out.println("list"+u.getIdName());
                 if (list1.isEmpty()){
+                    //el usuario ganador no estaba en el ranking
                     Rank r = new Rank();
                     System.out.println("Creando nuevo Rak");
                     //r.set("user_id",list.get(1));
@@ -64,6 +74,7 @@ public class NewGame {
                     u.save();
 
                 }else{
+                    //el usuario ganador si estaba en el ranking
                     System.out.println("Modificando Rank");
                     Rank r = list1.get(0);
                     r.set("games_won",r.getInteger("games_won")+1);
@@ -71,29 +82,32 @@ public class NewGame {
                     r.save();
                     u.save();
                 } 
+                //registro el juego con su ganador
+                Game game = new Game();
+     
+                 List<User> ulist1 = User.where("username=?",player1);
+                 List<User> ulist2 = User.where("username=?",player2);
+                 List<User> ulistWin = User.where("username=?",ganador);
+                 game.set("player1_id",ulist1.get(0).getId());
+                 game.set("player2_id",ulist2.get(0).getId());
+                 game.set("win_id",ulistWin.get(0).getId());
+                 game.save();
             
         }
          
-            Game game = new Game();
-     
-            List<User> ulist1 = User.where("username=?",player1);
-            List<User> ulist2 = User.where("username=?",player2);
-            game.set("player1_id",ulist1.get(0).getId());
-            game.set("player2_id",ulist2.get(0).getId());
-            game.save();
+            
             
       }
       public static void saveGame(Board tablero,Integer idgame){
-        int columnas=tablero.getMatrix()[0].length;
-        int filas=tablero.getMatrix().length;
+        int columnas=tablero.getColumns();
+        int filas=tablero.getRows();
       
           int index=0;
             Cell[] arreglo= new Cell[tablero.getNumberOfCells()];
             for(int i = 0; i<filas;i++){
                 for(int j = 0; j<columnas;j++){
-                    System.out.println("entre for");
                     arreglo[index]=new Cell();
-                    arreglo[index].set("fila",i,"columna",j,"valor",tablero.getCell(i,j),"game_id",1);
+                    arreglo[index].set("fila",i,"columna",j,"valor",tablero.getCell(i,j),"game_id",idgame);
                     arreglo[index].save();
                     index++;
                 }

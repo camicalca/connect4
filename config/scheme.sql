@@ -18,8 +18,8 @@ CREATE TABLE users(
   CREATE TABLE ranks(
   id INT(11) not null auto_increment primary key,
     user_id INT(11) ,
-    games_won INT(11) 
-   
+    games_won INT(11), 
+   games_played INT(11)
 );
 
  DROP TABLE IF EXISTS games;

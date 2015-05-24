@@ -13,7 +13,8 @@ import java.util.Scanner;
 public class NewGame {
    
     
-    
+    //
+    //FALTA AGREGAR LAS PARTIDAS JUGADAS AL JUGADOR QUE NO GANO
     public static void play(Board tablero,String player1, String player2){
         int counter = 0;
         tablero.toStringB();
@@ -57,7 +58,7 @@ public class NewGame {
                 //Hubo un ganador
                 System.out.println("El jugador "+juega+" gano el juego");
                 String ganador = juega;
-                List<User> list = User.where("username =?",juega);
+                List<User> list = User.where("username =?",ganador);
                 List<Rank> list1;
                 User u = list.get(0);
                 list1 = Rank.where("user_id =?",u.getId());
@@ -66,18 +67,19 @@ public class NewGame {
                 if (list1.isEmpty()){
                     //el usuario ganador no estaba en el ranking
                     Rank r = new Rank();
-                    System.out.println("Creando nuevo Rak");
+
                     //r.set("user_id",list.get(1));
                     r.set("games_won",1);
+                    r.set("games_played",1);
                     u.add(r);
                     r.save();
                     u.save();
 
                 }else{
                     //el usuario ganador si estaba en el ranking
-                    System.out.println("Modificando Rank");
                     Rank r = list1.get(0);
                     r.set("games_won",r.getInteger("games_won")+1);
+                    r.set("games_played",r.getInteger("games_played")+1);
                     u.add(r);
                     r.save();
                     u.save();

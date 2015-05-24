@@ -36,6 +36,7 @@ DROP TABLE IF EXISTS cells;
  CREATE TABLE cells 
  (id integer not null primary key auto_increment,
  fila integer,
- columna integer
+ columna integer,
+ valor integer,
  game_id integer 	
 );

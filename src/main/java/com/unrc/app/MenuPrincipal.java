@@ -45,21 +45,29 @@ public class MenuPrincipal {
         String player1 = null;
         String player2 = null;
         for (int i=1;i<3;i++){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Ingrese el apellido del usuario "+i);
-        String last_name = reader.next();
-        System.out.println("Ingrese el nombre del usuario "+i);
-        String first_name = reader.next();
-        System.out.println("Ingrese el e mail del usuario "+i);
-        String email = reader.next();
-        System.out.println("Ingrese el username del usuario "+i);
-        String username = reader.next();
-        UserChecks.newUser(last_name,first_name,email,username);
-        if (i==1){
-            player1=username;
-        }else{
-            player2=username;
-            }
+             Scanner reader = new Scanner(System.in);
+             System.out.println("Ingrese el username del jugador "+i);
+             String username = reader.next();
+             List<User> usuarioL = User.where("username=?",username);
+             if (usuarioL.isEmpty()){
+             //no existe
+                System.out.println("USUARIO NO ENCONTRADO, CREE UNO"); 
+                System.out.println("Ingrese el apellido del jugador "+i);
+                String last_name = reader.next();
+                System.out.println("Ingrese el nombre del jugador "+i);
+                String first_name = reader.next();
+                System.out.println("Ingrese el el mail del jugador "+i);
+                String email = reader.next();
+                UserChecks.newUser(last_name,first_name,email,username);
+                if (i==1){player1=username;}else{player2=username;}
+             }else{
+                 System.out.println("USUARIO ENCONTRADO"); 
+                  if (i==1){player1=usuarioL.get(0).getString("username");}else{player2=usuarioL.get(0).getString("username");}
+             
+             
+             }
+        
+       
         }
         
         Board tablero = new Board();

@@ -21,10 +21,9 @@ public class NewGame {
         int player=1;
         String juega = null;
         int countfich=0;
-        int columnas=tablero.getColumns();
-        int filas=tablero.getRows();
+       
         
-        while ((!BoardTools.checkBoard(tablero))&&(countfich<filas*columnas)){
+        while ((!BoardTools.checkBoard(tablero))&&(countfich<tablero.getNumberOfCells())){
             if (counter%2==0){
                 player=1;
                 juega=player1;
@@ -42,7 +41,7 @@ public class NewGame {
             System.out.println("==================");
             tablero.toStringB();
         }
-            if(countfich==filas*columnas){
+            if(countfich==tablero.getNumberOfCells()){
                 //hubo un empate
                 System.out.println("Juego Empatado");
                 Game game = new Game();

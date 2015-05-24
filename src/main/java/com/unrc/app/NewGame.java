@@ -99,7 +99,7 @@ public class NewGame {
             
             
       }
-      public static void saveGame(Board tablero,Integer idgame){
+    public static void saveGame(Board tablero,Integer idgame){
         int columnas=tablero.getColumns();
         int filas=tablero.getRows();
       
@@ -114,7 +114,7 @@ public class NewGame {
                 }
             }
       }
-      public static Board loadBoard(Integer gameid){
+    public static Board loadBoard(Integer gameid){
           List<Cell> cellList = Cell.where("game_id=?",gameid);
           Board tableroCargado = new Board();
           int index = 0;

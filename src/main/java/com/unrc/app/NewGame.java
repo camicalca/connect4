@@ -16,6 +16,7 @@ public class NewGame {
     //
     //FALTA AGREGAR LAS PARTIDAS JUGADAS AL JUGADOR QUE NO GANO
     public static void play(Board tablero,String player1, String player2){
+        boolean guardar=false;
         int counter = 0;
         tablero.toStringB();
         int player=1;
@@ -23,7 +24,7 @@ public class NewGame {
         int countfich=0;
        
         
-        while ((!BoardTools.checkBoard(tablero))&&(countfich<tablero.getNumberOfCells())){
+        while ((!BoardTools.checkBoard(tablero))&&(countfich<tablero.getNumberOfCells())&&(guardar==false)){
             if (counter%2==0){
                 player=1;
                 juega=player1;
@@ -32,15 +33,58 @@ public class NewGame {
                 player = 2;
                 juega=player2;
             }
-            System.out.println("TURNO DE: "+juega);
+            System.out.println("==================");
+             System.out.println("  Precione 100----->Guardar Partida");
+            System.out.println( "  Ingrese columna del TURNO DE: "+juega);
             Scanner scan = new Scanner (System.in);
             int c = scan.nextInt();
-            countfich++;
-            BoardTools.move(tablero,c,player);
-            counter++;
-            System.out.println("==================");
-            tablero.toStringB();
+            if (c==100){
+                guardar= true;
+                
+            }else{
+                countfich++;
+                BoardTools.move(tablero,c,player);
+                counter++;
+                System.out.println("==================");
+                tablero.toStringB();
+            }
         }
+        
+        if(guardar==true){
+            List<Game> gamelist = Game.where("player1_id=? and player2_id=? and win_id=?",player1,player2,juega);
+            if (gamelist.isEmpty()){
+                Game game = new Game();
+     
+                 List<User> ulist1 = User.where("username=?",player1);
+                 List<User> ulist2 = User.where("username=?",player2);
+                 game.set("player1_id",ulist1.get(0).getId());
+                 game.set("player2_id",ulist2.get(0).getId());
+                 game.set("win_id",null);
+                 game.save();
+                 
+                 Cell cell = new Cell();
+                 int i=0;
+                 int j=0;
+                 while (i<8){
+                     while (j<7){
+                        cell.set("fila =?",i);
+                        cell.set("columna =?",j);
+                        cell.set("valor =?",tablero.getCell(i,j));
+                       // falta agregar id del juego
+                       //cell.ser("game_id =?",??????)
+                        j++;
+                     }
+                    i++;
+                }
+                cell.save();
+                
+            }
+                
+        }else{
+        
+        
+        
+        //Termino juego ----> se guardan datos en la base de datos
             if(countfich==tablero.getNumberOfCells()){
                 //hubo un empate
                 System.out.println("Juego Empatado");
@@ -54,7 +98,16 @@ public class NewGame {
                  game.save();
            
             }else{
+                //consulto jugadro no ganador
+                String perdedor = null;
+                if (juega==player1){
+                    perdedor = player2;
+                }else{
+                       perdedor=player1;
+                     }
+                
                 //Hubo un ganador
+                //Cargo datos del rank ganador
                 System.out.println("El jugador "+juega+" gano el juego");
                 String ganador = juega;
                 List<User> list = User.where("username =?",ganador);
@@ -63,7 +116,37 @@ public class NewGame {
                 list1 = Rank.where("user_id =?",u.getId());
                 System.out.println(u.getId());
                 System.out.println("list"+u.getIdName());
-                if (list1.isEmpty()){
+                //Cargo datos del rank perdedor
+                List<User> list2 = User.where("username =?",perdedor);
+                List<Rank> list3;
+                User p = list2.get(0);
+                list3 = Rank.where("user_id =?",p.getId());
+                
+                if (list3.isEmpty()){
+                    //el usuario perdedor no estaba en el ranking
+                    Rank r = new Rank();
+
+                    //r.set("user_id",list.get(1));
+                    r.set("games_won",0);
+                    r.set("games_played",1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+
+                }else{
+                    //el usuario perdedor si estaba en el ranking
+                    Rank r = list1.get(0);
+                    r.set("games_won",r.getInteger("games_won"));
+                    r.set("games_played",r.getInteger("games_played")+1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+                    
+                } 
+                
+                //Cargo rank del jugador ganador
+                
+                 if (list1.isEmpty()){
                     //el usuario ganador no estaba en el ranking
                     Rank r = new Rank();
 
@@ -82,7 +165,15 @@ public class NewGame {
                     u.add(r);
                     r.save();
                     u.save();
+                    
                 } 
+                
+                
+                
+                
+                
+                
+                
                 //registro el juego con su ganador
                 Game game = new Game();
      
@@ -94,9 +185,8 @@ public class NewGame {
                  game.set("win_id",ulistWin.get(0).getId());
                  game.save();
             
-        }
-         
-            
+            }
+        }     
             
       }
     public static void saveGame(Board tablero,Integer idgame){

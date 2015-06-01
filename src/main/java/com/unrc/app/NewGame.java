@@ -63,7 +63,7 @@ public class NewGame {
                  if (!gamlist.isEmpty()){
                     int idgame=0;
                     int i=0;
-                   // while(gamlist.size()){
+                    while(i<gamlist.size()){
                            idgame= (int) gamlist.get(i).getId();
                            i++;
                        }

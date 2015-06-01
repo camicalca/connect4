@@ -52,22 +52,24 @@ public class NewGame {
         
         if(guardar==true){
             Game game = new Game();
-            int idgame=0;
+           
                  List<User> ulist1 = User.where("username=?",player1);
                  List<User> ulist2 = User.where("username=?",player2);
                  game.set("player1_id",ulist1.get(0).getId());
                  game.set("player2_id",ulist2.get(0).getId());
                  game.set("win_id",null);
                  game.save();
-                 List <Game> gamlist = Game.where("player1_id=? player2_id=?",player1,player2);
+                 List <Game> gamlist = Game.where("(player1_id=? and player2_id=?) or (player1_id=? and player2_id=?)",ulist1.get(0).getId(),ulist2.get(0).getId(),ulist2.get(0).getId(),ulist1.get(0).getId());
                  if (!gamlist.isEmpty()){
-                        int i=0;
-                       while(!gamlist.isEmpty()){
-                           idgame=(int) gamlist.get(i).getId();
+                    int idgame=0;
+                    int i=0;
+                   // while(gamlist.size()){
+                           idgame= (int) gamlist.get(i).getId();
                            i++;
                        }
+                    saveGame(tablero,idgame);
                  }
-                 saveGame(tablero,idgame);
+                 
                  
                 
                 

@@ -51,34 +51,25 @@ public class NewGame {
         }
         
         if(guardar==true){
-            List<Game> gamelist = Game.where("player1_id=? and player2_id=? and win_id=?",player1,player2,juega);
-            if (gamelist.isEmpty()){
-                Game game = new Game();
-     
+            Game game = new Game();
+            int idgame=0;
                  List<User> ulist1 = User.where("username=?",player1);
                  List<User> ulist2 = User.where("username=?",player2);
                  game.set("player1_id",ulist1.get(0).getId());
                  game.set("player2_id",ulist2.get(0).getId());
                  game.set("win_id",null);
                  game.save();
+                 List <Game> gamlist = Game.where("player1_id=? player2_id=?",player1,player2);
+                 if (!gamlist.isEmpty()){
+                        int i=0;
+                       while(!gamlist.isEmpty()){
+                           idgame=(int) gamlist.get(i).getId();
+                           i++;
+                       }
+                 }
+                 saveGame(tablero,idgame);
                  
-                 Cell cell = new Cell();
-                 int i=0;
-                 int j=0;
-                 while (i<8){
-                     while (j<7){
-                        cell.set("fila =?",i);
-                        cell.set("columna =?",j);
-                        cell.set("valor =?",tablero.getCell(i,j));
-                       // falta agregar id del juego
-                       //cell.ser("game_id =?",??????)
-                        j++;
-                     }
-                    i++;
-                }
-                cell.save();
                 
-            }
                 
         }else{
         

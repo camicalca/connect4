@@ -11,12 +11,12 @@ import static spark.Spark.*;
 public class App
 {
     public static void main( String[] args )
-    {/*
+    {
       
 
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
        
-        User u1 = new User();
+       /* User u1 = new User();
         u1.set("first_name", "santipassa","username","santipa332");
         u1.save();
         User u2 = new User();
@@ -26,7 +26,7 @@ public class App
         Rank r = new Rank();
         r.set("position",1,"games_won",10);
         u1.add(r);
-        u1.save();
+        u1.save();*/
       
        
 
@@ -34,10 +34,10 @@ public class App
         
        
         MenuPrincipal.mostrarMenuPrincipal();
-        Base.close();*/
+        Base.close();
 
         
-    get("/hello", (req, res) -> "Hello World");
+    //get("/hello", (req, res) -> "Hello World");
         }
     
 }

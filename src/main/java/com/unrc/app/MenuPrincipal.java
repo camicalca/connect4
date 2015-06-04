@@ -26,7 +26,8 @@ public class MenuPrincipal {
             }, new MustacheTemplateEngine());
             post("/play", (request, response) -> {
                 
-                System.out.println(request.queryParams("jugador1"));
+                System.out.println(request.queryParams("Usuario1"));
+                System.out.println(request.queryParams("contrasenia"));
                 
                 System.out.println(request.queryMap());
                 System.out.println(request.attributes());

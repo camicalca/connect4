@@ -38,7 +38,7 @@ public class App
        
        MenuPrincipal.mostrarMenuPrincipal();
         Base.close();
-            get("/play", (request, response) -> {
+           /* get("/play", (request, response) -> {
                 
                 // The hello.ftl file is located in directory:
                 // src/test/resources/spark/examples/templateview/freemarker
@@ -62,7 +62,7 @@ public class App
                 // src/test/resources/spark/examples/templateview/freemarker
                return new ModelAndView(attributes, "hello.mustache");
             }, new MustacheTemplateEngine());
-            
+            */
             
             
             

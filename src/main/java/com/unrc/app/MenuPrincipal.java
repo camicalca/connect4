@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package com.unrc.app;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import spark.ModelAndView;
+import static spark.Spark.get;
+import static spark.Spark.post;
 /**
  *
  * @author santiago
@@ -13,8 +18,34 @@ import java.util.Scanner;
 public class MenuPrincipal {
        
     public static void mostrarMenuPrincipal(){
+        get("/play", (request, response) -> {
+                
+                // The hello.ftl file is located in directory:
+                // src/test/resources/spark/examples/templateview/freemarker
+               return new ModelAndView(null, "play.mustache");
+            }, new MustacheTemplateEngine());
+            post("/play", (request, response) -> {
+                
+                System.out.println(request.queryParams("jugador1"));
+                
+                System.out.println(request.queryMap());
+                System.out.println(request.attributes());
+               return new ModelAndView(null, "game.mustache");
+            }, new MustacheTemplateEngine());
+            
+            
+            get("/", (request, response) -> {
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("message", "Hello FreeMarker World");
+
+                // The hello.ftl file is located in directory:
+                // src/test/resources/spark/examples/templateview/freemarker
+               return new ModelAndView(attributes, "hello.mustache");
+            }, new MustacheTemplateEngine());
+        
+        
         Integer opcion=-1;
-        Scanner entrada;
+        /*Scanner entrada;
             System.out.println("================================");
             System.out.println("MENU PRINCIPAL");
             System.out.println("1---->Jugar");
@@ -27,7 +58,7 @@ public class MenuPrincipal {
            entrada = new Scanner(System.in);
            opcion = entrada.nextInt();
            
-        }
+        }*/
         switch (opcion) {
 			case 1: jugar();
 				break;

@@ -1,7 +1,10 @@
 package com.unrc.app;
 
 import com.unrc.app.*;
+import java.util.HashMap;
+import java.util.Map;
 import org.javalite.activejdbc.Base;
+import spark.ModelAndView;
 import static spark.Spark.*;
 
 /**
@@ -33,11 +36,39 @@ public class App
 
         
        
-        MenuPrincipal.mostrarMenuPrincipal();
+       MenuPrincipal.mostrarMenuPrincipal();
         Base.close();
+            get("/play", (request, response) -> {
+                
+                // The hello.ftl file is located in directory:
+                // src/test/resources/spark/examples/templateview/freemarker
+               return new ModelAndView(null, "play.mustache");
+            }, new MustacheTemplateEngine());
+            post("/play", (request, response) -> {
+                
+                System.out.println(request.queryParams("jugador1"));
+                
+                System.out.println(request.queryMap());
+                System.out.println(request.attributes());
+               return new ModelAndView(null, "game.mustache");
+            }, new MustacheTemplateEngine());
+            
+            
+            get("/", (request, response) -> {
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("message", "Hello FreeMarker World");
 
+                // The hello.ftl file is located in directory:
+                // src/test/resources/spark/examples/templateview/freemarker
+               return new ModelAndView(attributes, "hello.mustache");
+            }, new MustacheTemplateEngine());
+            
+            
+            
+            
         
-    //get("/hello", (req, res) -> "Hello World");
-        }
+            
+        
     
+}
 }

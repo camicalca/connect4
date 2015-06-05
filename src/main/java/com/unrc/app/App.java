@@ -17,7 +17,7 @@ public class App
     {
       
 
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+        //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
        
        /* User u1 = new User();
         u1.set("first_name", "santipassa","username","santipa332");
@@ -37,7 +37,7 @@ public class App
         
        
        MenuPrincipal.mostrarMenuPrincipal();
-        Base.close();
+       //Base.close();
            /* get("/play", (request, response) -> {
                 
                 // The hello.ftl file is located in directory:

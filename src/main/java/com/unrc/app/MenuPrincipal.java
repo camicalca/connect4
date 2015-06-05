@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import org.javalite.activejdbc.Base;
 import spark.ModelAndView;
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -18,22 +19,55 @@ import static spark.Spark.post;
 public class MenuPrincipal {
        
     public static void mostrarMenuPrincipal(){
+    //--------------------------------------------------------------------------
         get("/play", (request, response) -> {
                 
                 // The hello.ftl file is located in directory:
                 // src/test/resources/spark/examples/templateview/freemarker
                return new ModelAndView(null, "play.mustache");
             }, new MustacheTemplateEngine());
+    //--------------------------------------------------------------------------
+        //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
                 
-                System.out.println(request.queryParams("Usuario1"));
-                System.out.println(request.queryParams("contrasenia"));
+                System.out.println(request.queryParams("Usuario1R"));
+                System.out.println(request.queryParams("Usuario2R"));
+
                 
                 System.out.println(request.queryMap());
                 System.out.println(request.attributes());
-               return new ModelAndView(null, "game.mustache");
+                String player1 = request.queryParams("Usuario1R");
+                String player2 = request.queryParams("Usuario2R");
+                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                boolean a = jugar(player1,player2);
+                Base.close();
+                if (a){
+                   return new ModelAndView(null, "game.mustache"); 
+                }else{
+                    return new ModelAndView(null, "nogame.mustache"); 
+                }
+               
+            }, new MustacheTemplateEngine());
+    //--------------------------------------------------------------------------
+            //Metodo que registra usuario nuevo
+            post("/registrar", (request, response) -> {
+                String usuario = request.queryParams("Usuario1");
+                String nombre = request.queryParams("nombre1");
+                String apellido = request.queryParams("apellido1");
+                String mail = request.queryParams("mail1");
+                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                boolean a = registrar(usuario,nombre,apellido,mail);
+                Base.close();
+                if (a){
+                   return new ModelAndView(null, "play.mustache"); 
+                }else{
+                    return new ModelAndView(null, "nogame.mustache"); 
+                }
+               
             }, new MustacheTemplateEngine());
             
+     
+    //--------------------------------------------------------------------------    
             
             get("/", (request, response) -> {
                 Map<String, Object> attributes = new HashMap<>();
@@ -45,67 +79,23 @@ public class MenuPrincipal {
             }, new MustacheTemplateEngine());
         
         
-        Integer opcion=-1;
-        /*Scanner entrada;
-            System.out.println("================================");
-            System.out.println("MENU PRINCIPAL");
-            System.out.println("1---->Jugar");
-            System.out.println("2---->Ver stats de un usuario");
-            System.out.println("3---->Eliminar usuario");
-            System.out.println("4---->Reanudar partida guardada");
-            System.out.println("5---->Para salir");
-            System.out.println("================================");
-        while(opcion!=1 && opcion!=2 && opcion!=3 && opcion!=4 && opcion!=5 && opcion!=6  ){
-           entrada = new Scanner(System.in);
-           opcion = entrada.nextInt();
-           
-        }*/
-        switch (opcion) {
-			case 1: jugar();
-				break;
-			case 2: verRanking();
-				break;
-                        case 3: eliminarUsuario();
-				break;
-                        case 4: reanudarPartida();
-				break;
-			case 5: System.out.println("SALIENDO...");
-				break;
-		}
+        
 	}
-    private static void jugar(){
-        String player1 = null;
-        String player2 = null;
-        for (int i=1;i<3;i++){
-             Scanner reader = new Scanner(System.in);
-             System.out.println("Ingrese el username del jugador "+i);
-             String username = reader.next();
-             List<User> usuarioL = User.where("username=?",username);
-             if (usuarioL.isEmpty()){
-             //no existe
-                System.out.println("USUARIO NO ENCONTRADO, CREE UNO"); 
-                System.out.println("Ingrese el apellido del jugador "+i);
-                String last_name = reader.next();
-                System.out.println("Ingrese el nombre del jugador "+i);
-                String first_name = reader.next();
-                System.out.println("Ingrese el el mail del jugador "+i);
-                String email = reader.next();
-                UserChecks.newUser(last_name,first_name,email,username);
-                if (i==1){player1=username;}else{player2=username;}
+    private static boolean jugar(String player1, String player2){
+        
+        List<User> usuario1 = User.where("username=?",player1);
+        List<User> usuario2 = User.where("username=?",player2);
+        
+         if ((usuario1.isEmpty())&&(usuario2.isEmpty())){
+                 //INFORMAR QUE DEBE REGISTRARSE
+                 return false;
              }else{
-                 System.out.println("USUARIO ENCONTRADO"); 
-                  if (i==1){player1=usuarioL.get(0).getString("username");}else{player2=usuarioL.get(0).getString("username");}
-             
-             
+                 /*
+                 Board tablero = new Board();
+                 NewGame.play(tablero,player1,player2);
+                 */
+                 return true;
              }
-        
-       
-        }
-        
-        Board tablero = new Board();
-        NewGame.play(tablero,player1,player2);
-       
-    
     }
     private static void reanudarPartida(){
         Scanner reader = new Scanner(System.in);
@@ -145,14 +135,24 @@ public class MenuPrincipal {
         }else{
             List<Rank> rankl = Rank.where("user_id=?",userL.get(0).getInteger("id"));
             System.out.println("Juegos ganados del usuario "+username+": "+rankl.get(0).getInteger("games_won"));
-            
-        
-        
         }
         
         
-        
+        }
+     
+        public static boolean registrar(String usuario,String nombre,String apellido,String mail){
+            List<User> usuarioL = User.where("username=?",usuario);
+             if (usuarioL.isEmpty()){
+                  UserChecks.newUser(apellido,nombre,mail,usuario);
+                  return true;
+             }else{
+                 return false;
+             }
     }
+        
+        
+        
+    
     private static void eliminarUsuario(){
         Scanner reader = new Scanner(System.in);
         System.out.println("Ingrese el username del usuario a eliminar (Borra en cascada)");

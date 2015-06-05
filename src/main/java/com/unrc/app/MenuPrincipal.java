@@ -20,12 +20,27 @@ public class MenuPrincipal {
        
     public static void mostrarMenuPrincipal(){
     //--------------------------------------------------------------------------
-        get("/play", (request, response) -> {
+        /*get("/play", (request, response) -> {
                 
                 // The hello.ftl file is located in directory:
                 // src/test/resources/spark/examples/templateview/freemarker
                return new ModelAndView(null, "play.mustache");
+            }, new MustacheTemplateEngine());*/
+        
+     //------------------------------------------------------------------------
+       get("/play", (request, response) -> {
+                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                
+           
+                Map<String, Object> attributes = new HashMap<>();
+                List <User> listausuario = User.findAll();
+                System.out.println("findall**********  "+listausuario);
+                attributes.put("listausuario",listausuario);
+                Base.close();
+                return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
+        
+        
     //--------------------------------------------------------------------------
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
@@ -38,11 +53,19 @@ public class MenuPrincipal {
                 System.out.println(request.attributes());
                 String player1 = request.queryParams("Usuario1R");
                 String player2 = request.queryParams("Usuario2R");
+                System.out.println(("****"+player1));
+                System.out.println(("****"+player2));
+                
                 Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
                 boolean a = jugar(player1,player2);
                 Base.close();
                 if (a){
-                   return new ModelAndView(null, "game.mustache"); 
+                    Map<String, Object> attributes = new HashMap<>();
+                    attributes.put("usuario1",player1);
+                    attributes.put("usuario2",player2);
+                    return new ModelAndView(attributes, "game.mustache");
+                    
+                   //return new ModelAndView(null, "game.mustache"); 
                 }else{
                     return new ModelAndView(null, "nogame.mustache"); 
                 }
@@ -66,6 +89,9 @@ public class MenuPrincipal {
                
             }, new MustacheTemplateEngine());
             
+    //--------------------------------------------------------------------------
+            
+            
      
     //--------------------------------------------------------------------------    
             
@@ -81,6 +107,10 @@ public class MenuPrincipal {
         
         
 	}
+    
+    //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    
     private static boolean jugar(String player1, String player2){
         
         List<User> usuario1 = User.where("username=?",player1);

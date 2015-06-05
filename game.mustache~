@@ -16,16 +16,25 @@
 	<form action="/drop" method="POST">
 		<input type="hidden"name="game_id" value={{current.game_id}} />
 		<input type="hidden"name="columna1"  />	
-		<input type="submit" value="TIRAR 1" name="tirar0"/>
-		<input type="submit" value="TIRAR 2" name="tirar1"/>
-		<input type="submit" value="TIRAR 3" name="tirar2"/>
-		<input type="submit" value="TIRAR 4" name="tirar3"/>
-		<input type="submit" value="TIRAR 5" name="tirar4"/>
-		<input type="submit" value="TIRAR 6" name="tirar5"/>
+		<input type="submit" value="TIRAR" name="tirar0"/>
+		<input type="submit" value="TIRAR" name="tirar1"/>
+		<input type="submit" value="TIRAR" name="tirar2"/>
 	</form>	
 	
 	
+	<table>
+		<tr>
+			<td><input  type="submit" value="columna 0"name="guardar"></td>
+  			<td><input  type="submit" value="columna 1"name="guardar"></td>
+  			<td><input  type="submit" value="columna 2"name="guardar"></td>
+  			<td><input  type="submit" value="columna 3"name="guardar"></td>
+  			<td><input  type="submit" value="columna 4"name="guardar"></td>		
+		</tr>
+  
 	
+
+
+</table>	
 		
 		<form action="guardar" method="POST">
 				<label>guardar</label>

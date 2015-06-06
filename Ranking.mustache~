@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<title>Connect4</title>		
+		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg">
+	</head>
+	<body>
+		<h1>Bienvenidos al juego CONNECT 4</h1>	
+		<img src="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" alt="Logotipo Connect4" title="Logotipo Connect4" width="300" height="200"/>
+		<hr>
+		<h4>Ranking</h4>	
+				
+		{{#rankings}}
+			{{id}}
+		{{/rankings}}		
+	</body>
+</html>

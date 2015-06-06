@@ -40,7 +40,9 @@
 		padding:5px;
 	}
 </style>
-{{tablero}}
+{{#tablero}}
+{{value1}}
+{{/tablero}}
 <table class="demo">
 	<thead>
 	<tr>

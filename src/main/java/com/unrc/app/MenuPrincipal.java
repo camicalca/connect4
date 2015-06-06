@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 import org.javalite.activejdbc.Base;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import static spark.Spark.get;
 import static spark.Spark.post;
 /**
@@ -26,15 +28,12 @@ public class MenuPrincipal {
                 String contrbd = "Control123";
         
     //--------------------------------------------------------------------------
-        /*get("/play", (request, response) -> {
-                
-                // The hello.ftl file is located in directory:
-                // src/test/resources/spark/examples/templateview/freemarker
+        post("/jugar", (request, response) -> {
                return new ModelAndView(null, "play.mustache");
-            }, new MustacheTemplateEngine());*/
+            }, new MustacheTemplateEngine());
         
      //------------------------------------------------------------------------
-       get("/play", (request, response) -> {
+       get("/hello", (request, response) -> {
                 Base.open(driver,jdbs,usubd,contrbd);
                 
            
@@ -51,8 +50,8 @@ public class MenuPrincipal {
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
                 
-                System.out.println(request.queryParams("combobox_usuario1"));
-                System.out.println(request.queryParams("combobox_usuario2"));
+                System.out.println(request.queryParams("Usuario1R"));
+                System.out.println(request.queryParams("Usuario2R"));
 
                 
                 System.out.println(request.queryMap());
@@ -100,17 +99,8 @@ public class MenuPrincipal {
             Map<String, Object> attributes = new HashMap<>();
                 Base.open(driver,jdbs,usubd,contrbd);
                 Board tablero = new Board();
-                int counter = 1;
-                for(int i= 0; i<tablero.getRows();i++){
-                    for(int j= 0; i<tablero.getColumns();j++){
-                        attributes.put("value",tablero.getCell(i, j));
-                        System.out.println(counter);
-                        counter++;
-                    }
-                }
-              
-                        
-               Base.close();
+                attributes.put("value",tablero);
+                Base.close();
                return new ModelAndView(attributes, "game.mustache");
             }, new MustacheTemplateEngine());
             
@@ -121,16 +111,34 @@ public class MenuPrincipal {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.put("message", "Hello FreeMarker World");
 
-                // The hello.ftl file is located in directory:
-                // src/test/resources/spark/examples/templateview/freemarker
                return new ModelAndView(attributes, "hello.mustache");
             }, new MustacheTemplateEngine());
-        
-        
-        
+    //--------------------------------------------------------------------------
+            post("/rank", (request,response) -> {
+               Map<String, Object> attributes = new HashMap<>();
+                Base.open(driver,jdbs,usubd,contrbd);
+                List <Rank> ranking = Rank.findAll();
+                attributes.put("rankings",ranking);
+                //Base.close(); 
+               return new ModelAndView(attributes,"rank.mustache");
+            }, new MustacheTemplateEngine());
+            
+           /* post("/gameload", (request,response) -> {
+               Map<String, Object> attributes = new HashMap<>();
+                Base.open(driver,jdbs,usubd,contrbd);
+                List <Game> partida = Game.findAll();
+                attributes.put("partida",partida);
+                //Base.close(); 
+               return new ModelAndView(attributes,"????.mustache");
+            }, new MustacheTemplateEngine());
+        */
+            
+            
 	}
     
     //--------------------------------------------------------------------------
+        
+    
     //--------------------------------------------------------------------------
     
     private static boolean jugar(String player1, String player2){

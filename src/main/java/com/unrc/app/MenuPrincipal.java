@@ -19,6 +19,12 @@ import static spark.Spark.post;
 public class MenuPrincipal {
        
     public static void mostrarMenuPrincipal(){
+            //Declaro variables de la base de datos
+                String driver = "com.mysql.jdbc.Driver";
+                String jdbs = "jdbc:mysql://localhost/connect4_development";
+                String usubd = "root";
+                String contrbd = "Control123";
+        
     //--------------------------------------------------------------------------
         /*get("/play", (request, response) -> {
                 
@@ -29,13 +35,13 @@ public class MenuPrincipal {
         
      //------------------------------------------------------------------------
        get("/play", (request, response) -> {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                Base.open(driver,jdbs,usubd,contrbd);
                 
            
                 Map<String, Object> attributes = new HashMap<>();
-                List <User> listausuario = User.findAll();
-                System.out.println("findall**********  "+listausuario);
-                attributes.put("listausuario",listausuario);
+                List <User> users = User.findAll();
+                System.out.println("findall**********  "+users);
+                attributes.put("users",users);
                 Base.close();
                 return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
@@ -45,8 +51,8 @@ public class MenuPrincipal {
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
                 
-                System.out.println(request.queryParams("Usuario1R"));
-                System.out.println(request.queryParams("Usuario2R"));
+                System.out.println(request.queryParams("combobox_usuario1"));
+                System.out.println(request.queryParams("combobox_usuario2"));
 
                 
                 System.out.println(request.queryMap());
@@ -56,7 +62,7 @@ public class MenuPrincipal {
                 System.out.println(("****"+player1));
                 System.out.println(("****"+player2));
                 
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                Base.open(driver,jdbs,usubd,contrbd);
                 boolean a = jugar(player1,player2);
                 Base.close();
                 if (a){
@@ -78,7 +84,7 @@ public class MenuPrincipal {
                 String nombre = request.queryParams("nombre1");
                 String apellido = request.queryParams("apellido1");
                 String mail = request.queryParams("mail1");
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
+                Base.open(driver,jdbs,usubd,contrbd);
                 boolean a = registrar(usuario,nombre,apellido,mail);
                 Base.close();
                 if (a){
@@ -90,7 +96,23 @@ public class MenuPrincipal {
             }, new MustacheTemplateEngine());
             
     //--------------------------------------------------------------------------
-            
+            get("/game", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+                Base.open(driver,jdbs,usubd,contrbd);
+                Board tablero = new Board();
+                int counter = 1;
+                for(int i= 0; i<tablero.getRows();i++){
+                    for(int j= 0; i<tablero.getColumns();j++){
+                        attributes.put("value",tablero.getCell(i, j));
+                        System.out.println(counter);
+                        counter++;
+                    }
+                }
+              
+                        
+               Base.close();
+               return new ModelAndView(attributes, "game.mustache");
+            }, new MustacheTemplateEngine());
             
      
     //--------------------------------------------------------------------------    

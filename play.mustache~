@@ -9,22 +9,19 @@
 		<hr>
 		{{users}}
 		
-		<table>
-		{{#listausuario}}
-			<tr>
-				<td>{{first_name}}</td>
-				<td>{{username}}</td>
-			</tr>		
-		{{/listausuario}}
-		</table>		
-		
 		<form action="/play" method="POST">
 			<select name="combobox_usuario1">
-			{{#listausuario}}
-			<option value="{{id}}">{{username}}</option>
-			{{/listausuario}}
+				{{#users}}
+				<option value="{{username}}"> {{id}}</option>
+				{{/users}}
+			</select>
+			<select name="combobox_usuario2">
+				{{#users}}
+				<option value="{{id}}"> {{id}}</option>
+				{{/users}}
+			</select>
 			<input  type="submit" value="Ingresar"name="play">
-		</select>
+		
 		</form>
 		
 				

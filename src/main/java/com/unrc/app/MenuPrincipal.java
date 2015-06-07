@@ -114,12 +114,13 @@ public class MenuPrincipal {
                return new ModelAndView(attributes, "hello.mustache");
             }, new MustacheTemplateEngine());
     //--------------------------------------------------------------------------
+           
             post("/rank", (request,response) -> {
                Map<String, Object> attributes = new HashMap<>();
                 Base.open(driver,jdbs,usubd,contrbd);
                 List <Rank> ranking = Rank.findAll();
                 attributes.put("rankings",ranking);
-                //Base.close(); 
+                //Base.close();
                return new ModelAndView(attributes,"rank.mustache");
             }, new MustacheTemplateEngine());
             

@@ -13,7 +13,7 @@
 		{{#rankings}}
 			{{id}}
 			{{games_played}}
-			{games_won}}
+			{{games_won}}
 		{{/rankings}}		
 	</body>
 </html>

@@ -46,16 +46,19 @@ public class Board {
     public int getCell(int row,int column){
         return matrix[row][column];
     }
-    public  void toStringB(){
-      for (int x=0; x < matrix.length; x++) {
-        System.out.print("F["+x+"]"+" |");
-      for (int y=0; y < matrix[x].length; y++) {
-        System.out.print (matrix[x][y]);
-      if (y!=matrix[x].length-1) System.out.print("\t");
-      }
-    System.out.println("|");
+    public String toStringB(){
+     String tabla;
+            tabla="<tr>\n" +		
+                "<td>"+this.getCell(0,0)+"</td>\n" +
+ "<td>"+this.getCell(0,1)+"</td>\n"+
+"<td>"+this.getCell(0,2)+"</td>\n" +
+"<td>"+this.getCell(0,3)+"</td>\n" +
+"<td>"+this.getCell(0,4)+"</td>\n" +
+"<td>"+this.getCell(0,5)+"</td>\n" +
+"		</tr>";
+                    
+                   
+            return tabla;
     }
-  }
-
     
 }

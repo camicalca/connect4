@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import org.javalite.activejdbc.Base;
+import static org.javalite.activejdbc.Model.attributes;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -29,7 +30,13 @@ public class MenuPrincipal {
         
     //--------------------------------------------------------------------------
         post("/jugar", (request, response) -> {
-               return new ModelAndView(null, "play.mustache");
+                Base.open(driver,jdbs,usubd,contrbd);
+                Map<String, Object> attributes = new HashMap<>();
+                List <User> users = User.findAll();
+                System.out.println("findall**********  "+users);
+                attributes.put("users",users);
+                Base.close();
+                return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
         
      //------------------------------------------------------------------------
@@ -49,23 +56,36 @@ public class MenuPrincipal {
     //--------------------------------------------------------------------------
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
-                
+                Map<String, Object> attributes = new HashMap<>();
                 System.out.println(request.queryParams("Usuario1R"));
                 System.out.println(request.queryParams("Usuario2R"));
 
                 
                 System.out.println(request.queryMap());
                 System.out.println(request.attributes());
-                String player1 = request.queryParams("Usuario1R");
-                String player2 = request.queryParams("Usuario2R");
+                String player1 = request.queryParams("combobox_usuario1");
+                String player2 = request.queryParams("combobox_usuario2");
                 System.out.println(("****"+player1));
                 System.out.println(("****"+player2));
                 
                 Base.open(driver,jdbs,usubd,contrbd);
                 boolean a = jugar(player1,player2);
                 Base.close();
+                
+                Base.open(driver,jdbs,usubd,contrbd);
+                Board tablero = new Board();
+                System.out.println("tablero"+tablero.toStringB());
+                String test = "<table> <tr>\n" +		
+                "<td>0</td>\n" +
+ "<td>0</td>\n"+
+"<td>1</td>\n" +
+"<td>2</td>\n" +
+"<td>3</td>\n" +
+"<td>4</td>\n" +
+"		</tr> </table>";
+                attributes.put("tablero",test);
                 if (a){
-                    Map<String, Object> attributes = new HashMap<>();
+                    
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
                     return new ModelAndView(attributes, "game.mustache");
@@ -99,7 +119,16 @@ public class MenuPrincipal {
             Map<String, Object> attributes = new HashMap<>();
                 Base.open(driver,jdbs,usubd,contrbd);
                 Board tablero = new Board();
-                attributes.put("value",tablero);
+                System.out.println("tablero"+tablero.toStringB());
+                String test = "<table> <tr>\n" +		
+                "<td>0</td>\n" +
+ "<td>0</td>\n"+
+"<td>1</td>\n" +
+"<td>2</td>\n" +
+"<td>3</td>\n" +
+"<td>4</td>\n" +
+"		</tr> </table>";
+                attributes.put("tablero",test);
                 Base.close();
                return new ModelAndView(attributes, "game.mustache");
             }, new MustacheTemplateEngine());
@@ -144,8 +173,8 @@ public class MenuPrincipal {
     
     private static boolean jugar(String player1, String player2){
         
-        List<User> usuario1 = User.where("username=?",player1);
-        List<User> usuario2 = User.where("username=?",player2);
+        List<User> usuario1 = User.where("id=?",player1);
+        List<User> usuario2 = User.where("id=?",player2);
         
          if ((usuario1.isEmpty())&&(usuario2.isEmpty())){
                  //INFORMAR QUE DEBE REGISTRARSE

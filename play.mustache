@@ -12,12 +12,12 @@
 		<form action="/play" method="POST">
 			<select name="combobox_usuario1">
 				{{#users}}
-				<option value="{{username}}"> {{username}}</option>
+				<option value="{{username}}"> {{toString}}</option>
 				{{/users}}
 			</select>
 			<select name="combobox_usuario2">
 				{{#users}}
-				<option value="{{id}}"> {{id}}</option>
+				<option value="{{id}}"> {{toString}}</option>
 				{{/users}}
 			</select>
 			<input  type="submit" value="Ingresar"name="play">

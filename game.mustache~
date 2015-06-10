@@ -23,7 +23,9 @@
 		<input type="submit" value="      TIRAR 5     " name="tirar4"/>
 		<input type="submit" value="      TIRAR 6     " name="tirar5"/>
 	</form>	
-		
+{{#tabla}}
+	{{toStringB}}
+{{/tabla}}	
 		<style>
 	.demo {
 		border:1px solid #C0C0C0;
@@ -40,85 +42,9 @@
 		padding:5px;
 	}
 </style>
-{{#tablero}}
-{{value1}}
-{{/tablero}}
-<table class="demo">
-	<thead>
-	<tr>
-		<th>Columna 1</th>
-		<th>Columna 2</th>
-		<th>Columna 3</th>
-		<th>Columna 4</th>
-		<th>Columna 5</th>
-		<th>Columna 6</th>
-	
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		{{#tablero}}
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		{{/tablero}}
-	</tr>
-	<tr>
-		{{#tablero}}
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		<td>{{value1}}</td>
-		{{/tablero}}
-	</tr>
-	<tr>
-		{{#tablero}}
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		{{/tablero}}
-	</tr>
-	<tr>
-		{{#tablero}}
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		{{/tablero}}
-	</tr>
-	<tr>
-		{{#tablero}}
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-	{{/tablero}}
-	</tr>
-	<tr>
-		{{#tablero}}
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		{{/tablero}}
-	</tr>
-	<tbody>
-</table>
-	
+
+	{{tablero}}
+		
 		
 		<form action="guardar" method="POST">
 				<label>guardar</label>

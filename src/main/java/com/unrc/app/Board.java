@@ -46,6 +46,7 @@ public class Board {
     public int getCell(int row,int column){
         return matrix[row][column];
     }
+
     
     private String returnImage(int number){
         if (number==0){
@@ -68,11 +69,13 @@ public class Board {
      String tabla;
             tabla="<table><tr>\n" +		
                 "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+
                 "<td>"+returnImage(getCell(0,1))+"</td>\n" +
                 "<td>"+returnImage(getCell(0,2))+"</td>\n" +
                 "<td>"+returnImage(getCell(0,3))+"</td>\n" +
                 "<td>"+returnImage(getCell(0,4))+"</td>\n" +
                 "<td>"+returnImage(getCell(0,5))+"</td>\n" +
+
                 "</tr>\n"+
                 
                 "<tr>\n" +		

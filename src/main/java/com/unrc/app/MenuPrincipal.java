@@ -57,12 +57,11 @@ public class MenuPrincipal {
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
                 Map<String, Object> attributes = new HashMap<>();
-                System.out.println(request.queryParams("Usuario1R"));
-                System.out.println(request.queryParams("Usuario2R"));
+                System.out.println("*-*-"+request.queryParams("Usuario1R"));
+                System.out.println("*-*-"+request.queryParams("Usuario2R"));
 
                 
-                System.out.println(request.queryMap());
-                System.out.println(request.attributes());
+               
                 String player1 = request.queryParams("combobox_usuario1");
                 String player2 = request.queryParams("combobox_usuario2");
                 System.out.println(("****"+player1));
@@ -154,20 +153,20 @@ public class MenuPrincipal {
     //--------------------------------------------------------------------------
     
     private static boolean jugar(String player1, String player2){
-        
+       boolean res;
+       if (player1!=player2){  
         List<User> usuario1 = User.where("id=?",player1);
         List<User> usuario2 = User.where("id=?",player2);
-        
-         if ((usuario1.isEmpty())&&(usuario2.isEmpty())){
+        if ((usuario1.isEmpty())&&(usuario2.isEmpty())){
                  //INFORMAR QUE DEBE REGISTRARSE
-                 return false;
-             }else{
-                 if (usuario1!=usuario2){
-                     return true;
-                 }else{
-                    return false;
-                 }
-             }
+                 res= false;
+         }else{
+            res= true;
+         }
+       }else{
+           res=false;
+       } 
+       return res;
     }
     private static void reanudarPartida(){
         Scanner reader = new Scanner(System.in);

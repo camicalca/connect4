@@ -75,13 +75,55 @@ public class MenuPrincipal {
                 Base.open(driver,jdbs,usubd,contrbd);
                 Board tablero = new Board();
                 System.out.println("tablero"+tablero.toStringB());
-                String test = "<table> <tr>\n" +		
-                "<td>0</td>\n" +
- "<td>0</td>\n"+
-"<td>1</td>\n" +
-"<td>2</td>\n" +
-"<td>3</td>\n" +
-"<td>4</td>\n" +
+                String test = " <table> <tr>\n" +		
+                "<td>"+tablero.getCell(0,0)+"</td>\n" +
+ "<td>"+tablero.getCell(0,1)+"</td>\n"+
+"<td>"+tablero.getCell(0,2)+"</td>\n" +
+"<td>"+tablero.getCell(0,3)+"</td>\n" +
+"<td>"+tablero.getCell(0,4)+"</td>\n" +
+"<td>"+tablero.getCell(0,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(1,0)+"</td>\n" +
+ "<td>"+tablero.getCell(1,1)+"</td>\n"+
+"<td>"+tablero.getCell(1,2)+"</td>\n" +
+"<td>"+tablero.getCell(1,3)+"</td>\n" +
+"<td>"+tablero.getCell(1,4)+"</td>\n" +
+"<td>"+tablero.getCell(1,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(2,0)+"</td>\n" +
+ "<td>"+tablero.getCell(2,1)+"</td>\n"+
+"<td>"+tablero.getCell(2,2)+"</td>\n" +
+"<td>"+tablero.getCell(2,3)+"</td>\n" +
+"<td>"+tablero.getCell(2,4)+"</td>\n" +
+"<td>"+tablero.getCell(2,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(3,0)+"</td>\n" +
+ "<td>"+tablero.getCell(3,1)+"</td>\n"+
+"<td>"+tablero.getCell(3,2)+"</td>\n" +
+"<td>"+tablero.getCell(3,3)+"</td>\n" +
+"<td>"+tablero.getCell(3,4)+"</td>\n" +
+"<td>"+tablero.getCell(3,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(4,0)+"</td>\n" +
+ "<td>"+tablero.getCell(4,1)+"</td>\n"+
+"<td>"+tablero.getCell(4,2)+"</td>\n" +
+"<td>"+tablero.getCell(4,3)+"</td>\n" +
+"<td>"+tablero.getCell(4,4)+"</td>\n" +
+"<td>"+tablero.getCell(4,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(5,0)+"</td>\n" +
+ "<td>"+tablero.getCell(5,1)+"</td>\n"+
+"<td>"+tablero.getCell(5,2)+"</td>\n" +
+"<td>"+tablero.getCell(5,3)+"</td>\n" +
+"<td>"+tablero.getCell(5,4)+"</td>\n" +
+"<td>"+tablero.getCell(5,5)+"</td>\n" +
+"		</tr> <tr>\n" +		
+                "<td>"+tablero.getCell(6,0)+"</td>\n" +
+ "<td>"+tablero.getCell(6,1)+"</td>\n"+
+"<td>"+tablero.getCell(6,2)+"</td>\n" +
+"<td>"+tablero.getCell(6,3)+"</td>\n" +
+"<td>"+tablero.getCell(6,4)+"</td>\n" +
+"<td>"+tablero.getCell(6,5)+"</td>\n" +
 "		</tr> </table>";
                 attributes.put("tablero",test);
                 if (a){
@@ -207,8 +249,8 @@ public class MenuPrincipal {
             
             String player1 = user1.get(0).getString("username");
             String player2 = user2.get(0).getString("username");
-            Board tableroGuardado = NewGame.loadBoard(idJuego);
-            NewGame.play(tableroGuardado, player1, player2);
+           // Board tableroGuardado = NewGame.loadBoard(idJuego);
+           // NewGame.play(tableroGuardado, player1, player2);
             
         }
         

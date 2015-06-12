@@ -16,7 +16,7 @@ public class App
     public static void main( String[] args )
     {
       
-
+        staticFileLocation("/connect4");
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/connect4_development", "root", "Control123");
        
        /* User u1 = new User();

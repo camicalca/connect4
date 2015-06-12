@@ -46,16 +46,73 @@ public class Board {
     public int getCell(int row,int column){
         return matrix[row][column];
     }
+    private String returnImage(int number){
+        if (number==0){
+            return "<img scr";
+        }else if(number==1){
+            return "imagen jugador 1";
+        
+        }else if (number==2){
+            return "imagen jugador 2";
+            
+        }else{
+            return null;
+        }
+    
+    
+    }
+    
+    
     public String toStringB(){
      String tabla;
-            tabla="<tr>\n" +		
-                "<td>"+this.getCell(0,0)+"</td>\n" +
- "<td>"+this.getCell(0,1)+"</td>\n"+
-"<td>"+this.getCell(0,2)+"</td>\n" +
-"<td>"+this.getCell(0,3)+"</td>\n" +
-"<td>"+this.getCell(0,4)+"</td>\n" +
-"<td>"+this.getCell(0,5)+"</td>\n" +
-"		</tr>";
+            tabla="<table><tr>\n" +		
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n"+
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "</tr>\n"+
+                
+                "<tr>\n" +		
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n"+
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "</tr>\n"+
+                "<tr>\n" +		
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n"+
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "</tr>\n"+
+                
+                "<tr>\n" +		
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n"+
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "</tr>\n"+
+                "<tr>\n" +		
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n"+
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "<td>"+returnImage(getCell(0,0))+"</td>\n" +
+                "</tr>\n</table>"
+                    
+                    
+                    
+                    
+                    
+                    ;
                     
                    
             return tabla;

@@ -74,7 +74,9 @@ public class MenuPrincipal {
                 
                 Base.open(driver,jdbs,usubd,contrbd);
                 Board tablero = new Board();
-                System.out.println("tablero"+tablero.toStringB());
+                
+             
+               tablero.toStringShell();
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
                 if (a){

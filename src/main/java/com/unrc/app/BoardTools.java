@@ -5,7 +5,7 @@ package com.unrc.app;
  *
  * @author santiago
  */
-public class CheckBoard {
+public class BoardTools {
   /*
     Esta clase provee métodos para realizar todas las comprobaciones respecto al tablero de juego
     */

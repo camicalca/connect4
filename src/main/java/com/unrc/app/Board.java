@@ -7,6 +7,7 @@ package com.unrc.app;
  */
 public class Board {
     private  int [][]matrix;
+    private int turno=1;
     //tablero personalizado
     public Board(int rows,int columns){
         matrix=new int[rows][columns];
@@ -25,6 +26,15 @@ public class Board {
             }
         }
     }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+    
     public int getRows(){
         return matrix.length;
     }

@@ -26,6 +26,7 @@ public static Boolean isEmpty(Board board,int row,int column){
 }
 
 public static Boolean move(Board board,int column,int player){
+    board.setTurno(board.getTurno()+1);
     Boolean control=false;
     for(int i=board.getMatrix().length-1;i>=0 && !control;i--){
         if(board.getCell(i, column)==0){

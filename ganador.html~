@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<script>
+
+    alert("I am an alert box!");
+    window.locationf="http://localhost:4567";
+
+</script>
+
+</body>
+</html>
+

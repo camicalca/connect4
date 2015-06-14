@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.unrc.app;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,8 @@ public class MenuPrincipal {
                 String jdbs = "jdbc:mysql://localhost/connect4_development";
                 String usubd = "root";
                 String contrbd = "Control123";
+                Board tablero = new Board();
+               // int  jugador = 1;
         
     //--------------------------------------------------------------------------
         post("/jugar", (request, response) -> {
@@ -68,20 +71,23 @@ public class MenuPrincipal {
                 System.out.println(("****"+player2));
                 
                 Base.open(driver,jdbs,usubd,contrbd);
-                boolean a = jugar(player1,player2);
+               // boolean a = jugar(player1,player2);
                 Base.close();
                 
-                Base.open(driver,jdbs,usubd,contrbd);
-                Board tablero = new Board();
+                
+              
                 
              
                tablero.toStringShell();
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
-                if (a){
-                    
+                if ((player1)!=(player2)){
+                    System.out.println(("****"+player1));
+                    System.out.println(("****"+player2));
+                    System.out.println("bool"+player1!=player2);
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
+                    attributes.put("jugador",1);
                     return new ModelAndView(attributes, "game.mustache");
                     
                    //return new ModelAndView(null, "game.mustache"); 
@@ -115,7 +121,41 @@ public class MenuPrincipal {
             }, new MustacheTemplateEngine());
             
     //--------------------------------------------------------------------------
-            
+            post("/game", (request,response) -> {
+                int jugador;
+                Map<String, Object> attributes = new HashMap<>();
+                int i=0;
+                while((request.queryParams("tirar"+i))==null){
+                    i++;
+            }
+                int turno=tablero.getTurno();
+                if(turno%2==0){
+                    jugador=2;
+                
+                }else{
+                    jugador=1;
+                
+                }
+               BoardTools.move(tablero,i,jugador);
+               if(BoardTools.checkBoard(tablero)){
+                   String script ="<script>"+
+                                    
+                                     "alert('Hubo un ganador');"+
+                                       "window.locationf='http://localhost:4567/play';"
+                                    +"</script>";
+                   attributes.put("javascript",script);
+                   return new ModelAndView(null,"ganador.html");
+               
+               }else{
+               
+               
+               attributes.put("jugador",jugador);
+               String test = tablero.toStringB();
+               attributes.put("tablero",test);
+              System.out.println("siguiente"+jugador);
+               
+               return new ModelAndView(attributes,"game.mustache");}
+            }, new MustacheTemplateEngine());
      
     //--------------------------------------------------------------------------    
             
@@ -131,7 +171,21 @@ public class MenuPrincipal {
                Map<String, Object> attributes = new HashMap<>();
                 Base.open(driver,jdbs,usubd,contrbd);
                 List <Rank> ranking = Rank.findAll();
-                attributes.put("rankings",ranking);
+                List<User> usuario = User.findAll();
+                int i=0;
+                int j=0;
+                String rankeado="";
+                while(i<ranking.size()){
+                    while (j<usuario.size()){
+                        if ((ranking.get(i).getInteger("user_id"))==(usuario.get(j).getInteger("id"))){
+                            rankeado="Juegos Ganados "+ranking.get(i).getInteger("games_won")+" Usuario "+usuario.get(j).getString("username");
+                            attributes.put("rankings",rankeado);
+                        }
+                        j++;
+                    }
+                    i++;
+                }
+                //attributes.put("rankings",rankeado);
                 //Base.close();
                return new ModelAndView(attributes,"rank.mustache");
             }, new MustacheTemplateEngine());

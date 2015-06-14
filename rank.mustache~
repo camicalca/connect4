@@ -11,9 +11,8 @@
 		<h4>Ranking</h4>	
 				
 		{{#rankings}}
-			{{id}}
-			{{games_played}}
-			{{games_won}}
+			id: {{id}}
+			{{ranking}}
 		{{/rankings}}		
 	</body>
 </html>

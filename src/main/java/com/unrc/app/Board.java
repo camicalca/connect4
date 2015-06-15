@@ -1,6 +1,8 @@
 
 package com.unrc.app;
 
+import java.util.List;
+
 /**
  *
  * @author santiago
@@ -186,5 +188,17 @@ public class Board {
     System.out.println("|");
     }
   }
+     public void loadBoard(Integer gameid){
+          List<Cell> cellList = Cell.where("game_id=?",gameid);
+          int index = 0;
+          while(index<cellList.size()){
+              this.setCell(cellList.get(index).getInteger("fila"),cellList.get(index).getInteger("columna"), cellList.get(index).getInteger("valor"));
+              index++;
+          }
+         
+      
+      
+      
+      }
     
 }

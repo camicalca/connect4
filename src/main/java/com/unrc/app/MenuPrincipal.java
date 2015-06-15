@@ -28,17 +28,37 @@ public class MenuPrincipal {
                 String jdbs = "jdbc:mysql://localhost/connect4_development";
                 String usubd = "root";
                 String contrbd = "Control123";
-                Board tablero = new Board();
+                Board tablero =new Board();
                // int  jugador = 1;
-        
+    //--------------------------------------------------------------------------
+        post("/Cargar", (request, response) -> {
+                Base.open(driver,jdbs,usubd,contrbd);
+                Map<String, Object> attributes = new HashMap<>();
+              
+                int idGame = Integer.parseInt(request.queryParams("juegoguardado"));
+                List<Game> gamejug = Game.where("id=?",idGame);
+                
+                tablero.loadBoard(idGame);
+                String test = tablero.toStringB();
+                tablero.setIdp1(gamejug.get(0).getInteger("player1_id"));
+                tablero.setIdp2(gamejug.get(0).getInteger("player1_id"));
+               
+                attributes.put("tablero",test);
+                Base.close();
+                return new ModelAndView(attributes, "game.mustache");
+            }, new MustacheTemplateEngine());
+                
+                
     //--------------------------------------------------------------------------
         post("/jugar", (request, response) -> {
                 Base.open(driver,jdbs,usubd,contrbd);
                 Map<String, Object> attributes = new HashMap<>();
                 List <User> users = User.findAll();
-                System.out.println("findall**********  "+users);
                 attributes.put("users",users);
-                Base.close();
+                List <Game> idgame = Game.where("win_id is null");
+                attributes.put("idgame",idgame);
+                
+                //Base.close();
                 return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
         
@@ -51,6 +71,7 @@ public class MenuPrincipal {
                 List <User> users = User.findAll();
                 System.out.println("findall**********  "+users);
                 attributes.put("users",users);
+                
                 Base.close();
                 return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
@@ -62,18 +83,15 @@ public class MenuPrincipal {
                 Map<String, Object> attributes = new HashMap<>();
                 System.out.println("*-*-"+request.queryParams("Usuario1R"));
                 System.out.println("*-*-"+request.queryParams("Usuario2R"));
+            
                 
-                
-               
                 String player1 = request.queryParams("combobox_usuario1");
                 String player2 = request.queryParams("combobox_usuario2");
                 System.out.println(("****"+player1));
                 System.out.println(("****"+player2));
                 tablero.setIdp1(Integer.parseInt(player1));
                 tablero.setIdp2(Integer.parseInt(player2));
-                Base.open(driver,jdbs,usubd,contrbd);
-               // boolean a = jugar(player1,player2);
-                Base.close();
+                
                 
                 
               
@@ -83,9 +101,7 @@ public class MenuPrincipal {
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
                 if ((player1)!=(player2)){
-                    System.out.println(("****"+player1));
-                    System.out.println(("****"+player2));
-                    System.out.println("bool"+player1!=player2);
+                 
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
                     attributes.put("jugador",1);
@@ -220,7 +236,7 @@ public class MenuPrincipal {
                  game.set("win_id",ulistWin.get(0).getId());
                  game.save();
                    
-                Base.close();
+                
                 return new ModelAndView(null,"ganador.html");
                 
                 }else{
@@ -232,7 +248,7 @@ public class MenuPrincipal {
                attributes.put("usuario1",player1);
                attributes.put("usuario2",player2);
               System.out.println("siguiente"+jugador);
-               
+               Base.close();
                return new ModelAndView(attributes,"game.mustache");}
             }, new MustacheTemplateEngine());
      
@@ -265,20 +281,12 @@ public class MenuPrincipal {
                     i++;
                 }
                 //attributes.put("rankings",rankeado);
-                //Base.close();
+                Base.close();
                return new ModelAndView(attributes,"rank.mustache");
             }, new MustacheTemplateEngine());
             
-           /* post("/gameload", (request,response) -> {
-               Map<String, Object> attributes = new HashMap<>();
-                Base.open(driver,jdbs,usubd,contrbd);
-                List <Game> partida = Game.findAll();
-                attributes.put("partida",partida);
-                //Base.close(); 
-               return new ModelAndView(attributes,"????.mustache");
-            }, new MustacheTemplateEngine());
-        */
-            
+        
+        /*--------------------------------------------------------------------*/    
            post("/guardar", (request,response) -> {
                Map<String, Object> attributes = new HashMap<>();
                 Base.open(driver,jdbs,usubd,contrbd);
@@ -307,18 +315,18 @@ public class MenuPrincipal {
                  
                 
                 
-                //Base.close(); 
+                Base.close(); 
+                tablero.clear();
                return new ModelAndView(null,"hello.mustache");
             }, new MustacheTemplateEngine());
             
                 
-	}
-    
-    //--------------------------------------------------------------------------
-        
+	
     
     //--------------------------------------------------------------------------
     
+    //--------------------------------------------------------------------------
+}
     public static void saveGame(Board tablero,Integer idgame){
         int columnas=tablero.getColumns();
         int filas=tablero.getRows();
@@ -417,6 +425,7 @@ public class MenuPrincipal {
         usuario.deleteCascade();
     
     }
+   
         
         
         

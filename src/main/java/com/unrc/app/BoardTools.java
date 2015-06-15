@@ -1,6 +1,8 @@
 
 package com.unrc.app;
 
+import java.util.List;
+
 /**
  *
  * @author santiago
@@ -37,6 +39,7 @@ public static Boolean move(Board board,int column,int player){
     }
     return control;
  }
+
     
     
     

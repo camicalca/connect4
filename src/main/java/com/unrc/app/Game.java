@@ -19,5 +19,8 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
 @BelongsTo(foreignKeyName="win_id",parent=User.class) 
 }) 
 public class Game extends Model {
- 
+
+   public String toStringv (){
+    return this.getString("id");
+}   
 }

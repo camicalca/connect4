@@ -7,7 +7,8 @@
 		<h1 align="center"> Registro CONNECT 4</h1>	
 		<img src="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" alt="Logotipo Connect4" title="Logotipo Connect4" width="300" height="200"/>
 		<hr>
-		{{users}}
+		
+		
 		
 		<form action="/play" method="POST">
 			<label><h3> Jugar</h3></label>
@@ -21,15 +22,29 @@
 				<option value="{{id}}"> {{toString}}</option>
 				{{/users}}
 			</select>
-			<input  type="submit" value="Ingresar"name="play">
+			<input  type="submit" value="Jugar"name="play">
+			
+					
 		
 		</form>
 		
-		<form action="Cargar" method="POST">
-				<label><h3> Cargar</h3></label>
-				<input  type="submit" value="Cargar Partida"name="Cargar">
+		<form action="/Cargar" method="POST">
+			<label><h3> Cargar Partida Guardada</h3></label>
+			<select name="juegoguardado">
+				{{#idgame}}
+				<option value="{{id}}"> {{id}}</option>
+				{{/idgame}}
+			</select>
+			
+			<input  type="submit" value="Cargar"name="Cargar">
+			
+					
 		
-		</form>		
+		</form>
+		
+		
+		
+		
 		
 		
 		

@@ -17,6 +17,7 @@
 	<form action="/game" method="POST">
 		<input type="hidden"name="game_id" value={{current.game_id}} />
 		<input type="hidden" name="jugador" value={{jugador}}/>
+		
 		<input type="hidden"name="columna1"  />	
 		<input type="submit" style="width:96px; height:25px" value="TIRAR 1" name="tirar0" />
 		<input type="submit" style="width:96px; height:25px" value="TIRAR 2" name="tirar1"/>
@@ -31,7 +32,7 @@
 
 	
 	{{{tablero}}}
-	{{javascript}}
+	{{{javascript}}}
 		
 		<form action="guardar" method="POST">
 				<label>guardar</label>

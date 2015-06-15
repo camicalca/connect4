@@ -8,6 +8,10 @@ package com.unrc.app;
 public class Board {
     private  int [][]matrix;
     private int turno=1;
+    private int idp1=0;
+    private int idp2=0;
+    
+    
     //tablero personalizado
     public Board(int rows,int columns){
         matrix=new int[rows][columns];
@@ -26,6 +30,31 @@ public class Board {
             }
         }
     }
+    public void clear(){
+        matrix=new int[7][6];
+        for(int i=0;i<7;i++){
+             for(int j=0;j<6;j++){
+                 matrix[i][j]=0;
+            }
+        }
+    }
+
+    public int getIdp1() {
+        return idp1;
+    }
+
+    public void setIdp1(int idp1) {
+        this.idp1 = idp1;
+    }
+
+    public int getIdp2() {
+        return idp2;
+    }
+
+    public void setIdp2(int idp2) {
+        this.idp2 = idp2;
+    }
+    
 
     public int getTurno() {
         return turno;

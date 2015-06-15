@@ -62,14 +62,15 @@ public class MenuPrincipal {
                 Map<String, Object> attributes = new HashMap<>();
                 System.out.println("*-*-"+request.queryParams("Usuario1R"));
                 System.out.println("*-*-"+request.queryParams("Usuario2R"));
-
+                
                 
                
                 String player1 = request.queryParams("combobox_usuario1");
                 String player2 = request.queryParams("combobox_usuario2");
                 System.out.println(("****"+player1));
                 System.out.println(("****"+player2));
-                
+                tablero.setIdp1(Integer.parseInt(player1));
+                tablero.setIdp2(Integer.parseInt(player2));
                 Base.open(driver,jdbs,usubd,contrbd);
                // boolean a = jugar(player1,player2);
                 Base.close();
@@ -122,12 +123,16 @@ public class MenuPrincipal {
             
     //--------------------------------------------------------------------------
             post("/game", (request,response) -> {
+                int player1 = tablero.getIdp1();
+                int player2 = tablero.getIdp2();
                 int jugador;
                 Map<String, Object> attributes = new HashMap<>();
+                attributes.put("usuario1",player1);
+                attributes.put("usuario2",player2);
                 int i=0;
                 while((request.queryParams("tirar"+i))==null){
                     i++;
-            }
+                }
                 int turno=tablero.getTurno();
                 if(turno%2==0){
                     jugador=2;
@@ -136,22 +141,96 @@ public class MenuPrincipal {
                     jugador=1;
                 
                 }
-               BoardTools.move(tablero,i,jugador);
-               if(BoardTools.checkBoard(tablero)){
-                   String script ="<script>"+
-                                    
-                                     "alert('Hubo un ganador');"+
-                                       "window.locationf='http://localhost:4567/play';"
-                                    +"</script>";
-                   attributes.put("javascript",script);
-                   return new ModelAndView(null,"ganador.html");
-               
-               }else{
+                BoardTools.move(tablero,i,jugador);
+                if(BoardTools.checkBoard(tablero)){
+                   tablero.clear();
+                   Base.open(driver,jdbs,usubd,contrbd);
+                   int perdedor =0;
+                   int ganador = jugador;
+                   if(jugador==1){
+                       perdedor=tablero.getIdp2();
+                   }else{
+                       perdedor=tablero.getIdp1();
+                   }
+                   //Cargo datos del rank ganador
+                   List<User> list = User.where("id=?",ganador);
+                   List<Rank> list1;
+                   User u = list.get(0);
+                   list1 = Rank.where("user_id =?",u.getId());
+                   //Cargo datos del rank perdedor
+                   List<User> list2 = User.where("id=?",perdedor);
+                   List<Rank> list3;
+                   User p = list2.get(0);
+                   list3 = Rank.where("user_id =?",p.getId());
+                   
+                   if (list3.isEmpty()){
+                    //el usuario perdedor no estaba en el ranking
+                    Rank r = new Rank();
+
+                    //r.set("user_id",list.get(1));
+                    r.set("games_won",0);
+                    r.set("games_played",1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+
+                }else{
+                    //el usuario perdedor si estaba en el ranking
+                    Rank r = list1.get(0);
+                    r.set("games_won",r.getInteger("games_won"));
+                    r.set("games_played",r.getInteger("games_played")+1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+                    
+                } 
+                   
+                //Cargo rank del jugador ganador
+                
+                 if (list1.isEmpty()){
+                    //el usuario ganador no estaba en el ranking
+                    Rank r = new Rank();
+
+                    //r.set("user_id",list.get(1));
+                    r.set("games_won",1);
+                    r.set("games_played",1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+
+                }else{
+                    //el usuario ganador si estaba en el ranking
+                    Rank r = list1.get(0);
+                    r.set("games_won",r.getInteger("games_won")+1);
+                    r.set("games_played",r.getInteger("games_played")+1);
+                    u.add(r);
+                    r.save();
+                    u.save();
+                    
+                }
+                  
+                //registro el juego con su ganador
+                Game game = new Game();
+     
+                 List<User> ulist1 = User.where("id=?",player1);
+                 List<User> ulist2 = User.where("id=?",player2);
+                 List<User> ulistWin = User.where("id=?",ganador);
+                 game.set("player1_id",ulist1.get(0).getId());
+                 game.set("player2_id",ulist2.get(0).getId());
+                 game.set("win_id",ulistWin.get(0).getId());
+                 game.save();
+                   
+                Base.close();
+                return new ModelAndView(null,"ganador.html");
+                
+                }else{
                
                
                attributes.put("jugador",jugador);
                String test = tablero.toStringB();
                attributes.put("tablero",test);
+               attributes.put("usuario1",player1);
+               attributes.put("usuario2",player2);
               System.out.println("siguiente"+jugador);
                
                return new ModelAndView(attributes,"game.mustache");}

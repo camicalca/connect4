@@ -12,19 +12,23 @@
 		<form action="/play" method="POST">
 			<select name="combobox_usuario1">
 				{{#users}}
-				<option value="{{username}}"> {{toString}}</option>
+				<option value="{{id}}"> {{toString}}</option>
 				{{/users}}
 			</select>
 			<select name="combobox_usuario2">
 				{{#users}}
-				<option value="{{username}}"> {{toString}}</option>
+				<option value="{{id}}"> {{toString}}</option>
 				{{/users}}
 			</select>
 			<input  type="submit" value="Ingresar"name="play">
 		
 		</form>
 		
-				
+		<form action="Cargar" method="POST">
+				<label><h2> Cargar</h2></label>
+				<input  type="submit" value="Cargar Partida"name="Cargar">
+		
+		</form>		
 		
 		
 		

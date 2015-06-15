@@ -279,13 +279,63 @@ public class MenuPrincipal {
             }, new MustacheTemplateEngine());
         */
             
+           post("/guardar", (request,response) -> {
+               Map<String, Object> attributes = new HashMap<>();
+                Base.open(driver,jdbs,usubd,contrbd);
+                int player1 = tablero.getIdp1();
+                int player2 = tablero.getIdp2();
+                Game game = new Game();
+                List<User> ulist1 = User.where("id=?",player1);
+                List<User> ulist2 = User.where("id=?",player2);
+                game.set("player1_id",ulist1.get(0).getId());
+                game.set("player2_id",ulist2.get(0).getId());
+                game.set("win_id",null);
+                game.save();
+                List <Game> gamlist = Game.where("(player1_id=? and player2_id=?) or (player1_id=? and player2_id=?)",ulist1.get(0).getId(),ulist2.get(0).getId(),ulist2.get(0).getId(),ulist1.get(0).getId());
+                if (!gamlist.isEmpty()){
+                    int idgame=0;
+                    int i=0;
+                    while(i<gamlist.size()){
+                           idgame= (int) gamlist.get(i).getId();
+                           i++;
+                       }
+                    saveGame(tablero,idgame);
+                 }else{
+                    
+                
+                   }
+                 
+                
+                
+                //Base.close(); 
+               return new ModelAndView(null,"hello.mustache");
+            }, new MustacheTemplateEngine());
             
+                
 	}
     
     //--------------------------------------------------------------------------
         
     
     //--------------------------------------------------------------------------
+    
+    public static void saveGame(Board tablero,Integer idgame){
+        int columnas=tablero.getColumns();
+        int filas=tablero.getRows();
+      
+          int index=0;
+            Cell[] arreglo= new Cell[tablero.getNumberOfCells()];
+            for(int i = 0; i<filas;i++){
+                for(int j = 0; j<columnas;j++){
+                    arreglo[index]=new Cell();
+                    arreglo[index].set("fila",i,"columna",j,"valor",tablero.getCell(i,j),"game_id",idgame);
+                    arreglo[index].save();
+                    index++;
+                }
+            }
+      }
+    
+    
     
     private static boolean jugar(String player1, String player2){
        boolean res;

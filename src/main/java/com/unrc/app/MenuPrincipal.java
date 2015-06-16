@@ -16,6 +16,8 @@ import spark.Request;
 import spark.Response;
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.before;
+import static spark.Spark.after;
 /**
  *
  * @author santiago
@@ -30,9 +32,24 @@ public class MenuPrincipal {
                 String contrbd = "Control123";
                 Board tablero =new Board();
                // int  jugador = 1;
+                
+                before((request,response) -> {
+                    if(!Base.hasConnection()){
+                        Base.open(driver,jdbs,usubd,contrbd);
+                    }});
+                after((request,response) -> {
+                    if(!Base.hasConnection()){
+                        Base.close();
+                    }});
+                    
+                
+                
+                
+                
+                
     //--------------------------------------------------------------------------
         post("/Cargar", (request, response) -> {
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 Map<String, Object> attributes = new HashMap<>();
               
                 int idGame = Integer.parseInt(request.queryParams("juegoguardado"));
@@ -45,14 +62,14 @@ public class MenuPrincipal {
                
                 attributes.put("tablero",test);
                 Game.delete("id=?", idGame);
-                Base.close();
+                //Base.close();
                 return new ModelAndView(attributes, "game.mustache");
             }, new MustacheTemplateEngine());
                 
                 
     //--------------------------------------------------------------------------
         post("/jugar", (request, response) -> {
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 Map<String, Object> attributes = new HashMap<>();
                 List <User> users = User.findAll();
                 attributes.put("users",users);
@@ -65,7 +82,7 @@ public class MenuPrincipal {
         
      //------------------------------------------------------------------------
        get("/hello", (request, response) -> {
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 
            
                 Map<String, Object> attributes = new HashMap<>();
@@ -73,7 +90,7 @@ public class MenuPrincipal {
                 System.out.println("findall**********  "+users);
                 attributes.put("users",users);
                 
-                Base.close();
+                //Base.close();
                 return new ModelAndView(attributes, "play.mustache");
             }, new MustacheTemplateEngine());
         
@@ -121,7 +138,7 @@ public class MenuPrincipal {
                 String nombre = request.queryParams("nombre1");
                 String apellido = request.queryParams("apellido1");
                 String mail = request.queryParams("mail1");
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 boolean a = registrar(usuario,nombre,apellido,mail);
                 
                 if (a){
@@ -129,10 +146,10 @@ public class MenuPrincipal {
                     List <User> users = User.findAll();
                     System.out.println("findall**********  "+users);
                     attributes.put("users",users);
-                    Base.close();
+                    //Base.close();
                    return new ModelAndView(attributes, "play.mustache"); 
                 }else{
-                    Base.close();
+                    //Base.close();
                     return new ModelAndView(null, "nogame.mustache"); 
                 }
                
@@ -160,8 +177,8 @@ public class MenuPrincipal {
                 }
                 BoardTools.move(tablero,i,jugador);
                 if(BoardTools.checkBoard(tablero)){
-                   tablero.clear();
-                   Base.open(driver,jdbs,usubd,contrbd);
+                   //tablero.clear();
+                   //Base.open(driver,jdbs,usubd,contrbd);
                    int perdedor =0;
                    int ganador = jugador;
                    if(jugador==1){
@@ -236,7 +253,7 @@ public class MenuPrincipal {
                  game.set("player2_id",ulist2.get(0).getId());
                  game.set("win_id",ulistWin.get(0).getId());
                  game.save();
-                   
+                 tablero.clear(); 
                 
                 return new ModelAndView(null,"ganador.html");
                 
@@ -249,7 +266,7 @@ public class MenuPrincipal {
                attributes.put("usuario1",player1);
                attributes.put("usuario2",player2);
               System.out.println("siguiente"+jugador);
-               Base.close();
+               //Base.close();
                return new ModelAndView(attributes,"game.mustache");}
             }, new MustacheTemplateEngine());
      
@@ -265,7 +282,7 @@ public class MenuPrincipal {
            
             post("/rank", (request,response) -> {
                Map<String, Object> attributes = new HashMap<>();
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 List <Rank> ranking = Rank.findAll();
                 List<User> usuario = User.findAll();
                 int i=0;
@@ -282,7 +299,7 @@ public class MenuPrincipal {
                     i++;
                 }
                 //attributes.put("rankings",rankeado);
-                Base.close();
+               //Base.close();
                return new ModelAndView(attributes,"rank.mustache");
             }, new MustacheTemplateEngine());
             
@@ -290,7 +307,7 @@ public class MenuPrincipal {
         /*--------------------------------------------------------------------*/    
            post("/guardar", (request,response) -> {
                Map<String, Object> attributes = new HashMap<>();
-                Base.open(driver,jdbs,usubd,contrbd);
+                //Base.open(driver,jdbs,usubd,contrbd);
                 int player1 = tablero.getIdp1();
                 int player2 = tablero.getIdp2();
                 Game game = new Game();
@@ -316,7 +333,7 @@ public class MenuPrincipal {
                  
                 
                 
-                Base.close(); 
+                //Base.close(); 
                 tablero.clear();
                return new ModelAndView(null,"hello.mustache");
             }, new MustacheTemplateEngine());

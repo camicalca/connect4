@@ -118,7 +118,7 @@ public class MenuPrincipal {
                tablero.toStringShell();
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
-                if ((player1)!=(player2)){
+                if (!(player1.equals( player2))){
                  
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
@@ -365,7 +365,7 @@ public class MenuPrincipal {
     
     private static boolean jugar(String player1, String player2){
        boolean res;
-       if (player1!=player2){  
+       if (!(player1.equals(player2))){  
         List<User> usuario1 = User.where("id=?",player1);
         List<User> usuario2 = User.where("id=?",player2);
         if ((usuario1.isEmpty())&&(usuario2.isEmpty())){

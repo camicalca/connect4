@@ -58,8 +58,8 @@ public class MenuPrincipal {
                 tablero.loadBoard(idGame);
                 String test = tablero.toStringB();
                 tablero.setIdp1(gamejug.get(0).getInteger("player1_id"));
-                tablero.setIdp2(gamejug.get(0).getInteger("player1_id"));
-               
+                tablero.setIdp2(gamejug.get(0).getInteger("player2_id"));
+                tablero.setTurno(gamejug.get(0).getInteger("turno"));
                 attributes.put("tablero",test);
                 Game.delete("id=?", idGame);
                 //Base.close();
@@ -183,18 +183,17 @@ public class MenuPrincipal {
                    int perdedorId;
                    int ganador = jugador;
                    int ganadorId;
+                   
                    if (ganador==1){
                        perdedor=2;
                        ganadorId=tablero.getIdp1();
+                       perdedorId=player2;
                    }else{
                        perdedor=1;
                        ganadorId=tablero.getIdp2();
+                       perdedorId=player1;
                    }
-                   if (perdedor==1){
-                       perdedorId=tablero.getIdp1();
-                   }else{
-                       perdedorId=tablero.getIdp2();
-                   }
+                
                        
                   
                     //Cargo datos del rank ganador
@@ -260,6 +259,7 @@ public class MenuPrincipal {
                  game.set("player1_id",tablero.getIdp1());
                  game.set("player2_id",tablero.getIdp2());
                  game.set("win_id",uGanador.getId());
+                 game.set("turno",tablero.getTurno());
                  game.save();
                  tablero.clear(); 
                 
@@ -323,6 +323,7 @@ public class MenuPrincipal {
                 List<User> ulist2 = User.where("id=?",player2);
                 game.set("player1_id",ulist1.get(0).getId());
                 game.set("player2_id",ulist2.get(0).getId());
+                game.set("turno",tablero.getTurno());
                 game.set("win_id",null);
                 game.save();
                 List <Game> gamlist = Game.where("(player1_id=? and player2_id=?) or (player1_id=? and player2_id=?)",ulist1.get(0).getId(),ulist2.get(0).getId(),ulist2.get(0).getId(),ulist1.get(0).getId());

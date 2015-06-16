@@ -44,6 +44,7 @@ public class MenuPrincipal {
                 tablero.setIdp2(gamejug.get(0).getInteger("player1_id"));
                
                 attributes.put("tablero",test);
+                Game.delete("id=?", idGame);
                 Base.close();
                 return new ModelAndView(attributes, "game.mustache");
             }, new MustacheTemplateEngine());

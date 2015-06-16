@@ -30,7 +30,7 @@
 		
 		<form action="/Cargar" method="POST">
 			<label><h3> Cargar Partida Guardada</h3></label>
-			<select name="combobox_juegoguardado">
+			<select name="juegoguardado">
 				{{#idgame}}
 				<option value="{{id}}"> {{id}}</option>
 				{{/idgame}}

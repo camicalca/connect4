@@ -17,10 +17,10 @@
 			</p>	
 		</form>		
 			
-		<form action="/rank0" method="POST">
+		<form action="/rank" method="POST">
 			<p align="left">
-				<label for="rank0"/>
-				<input type="submit" value="Ranking" name="rank0">
+				<label for="rank"/>
+				<input type="submit" value="Ranking" name="rank">
 				
 			</p>	
 		</form>

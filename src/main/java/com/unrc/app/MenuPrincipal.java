@@ -293,21 +293,9 @@ public class MenuPrincipal {
                 //Base.open(driver,jdbs,usubd,contrbd);
                 List <Rank> ranking = Rank.findAll();
                 List<User> usuario = User.findAll();
-                int i=0;
-                int j=0;
-                String rankeado="";
-                while(i<ranking.size()){
-                    while (j<usuario.size()){
-                        if ((ranking.get(i).getInteger("user_id"))==(usuario.get(j).getInteger("id"))){
-                            rankeado="Juegos Ganados "+ranking.get(i).getInteger("games_won")+" Usuario "+usuario.get(j).getString("username");
-                            attributes.put("rankings",rankeado);
-                        }
-                        j++;
-                    }
-                    i++;
-                }
-                //attributes.put("rankings",rankeado);
-               //Base.close();
+                attributes.put("ranking",ranking);
+                attributes.put("usuario", usuario);
+                       
                return new ModelAndView(attributes,"webApp/rank.mustache");
             }, new MustacheTemplateEngine());
             

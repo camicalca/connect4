@@ -179,79 +179,87 @@ public class MenuPrincipal {
                 if(BoardTools.checkBoard(tablero)){
                    //tablero.clear();
                    //Base.open(driver,jdbs,usubd,contrbd);
-                   int perdedor =0;
+                   int perdedor;
+                   int perdedorId;
                    int ganador = jugador;
-                   if(jugador==1){
-                       perdedor=tablero.getIdp2();
+                   int ganadorId;
+                   if (ganador==1){
+                       perdedor=2;
+                       ganadorId=tablero.getIdp1();
                    }else{
-                       perdedor=tablero.getIdp1();
+                       perdedor=1;
+                       ganadorId=tablero.getIdp2();
                    }
-                   //Cargo datos del rank ganador
-                   List<User> list = User.where("id=?",ganador);
-                   List<Rank> list1;
-                   User u = list.get(0);
-                   list1 = Rank.where("user_id =?",u.getId());
-                   //Cargo datos del rank perdedor
-                   List<User> list2 = User.where("id=?",perdedor);
-                   List<Rank> list3;
-                   User p = list2.get(0);
-                   list3 = Rank.where("user_id =?",p.getId());
+                   if (perdedor==1){
+                       perdedorId=tablero.getIdp1();
+                   }else{
+                       perdedorId=tablero.getIdp2();
+                   }
+                       
+                  
+                    //Cargo datos del rank ganador
+                  List<User> ganadorList = User.where("id=?",ganadorId);
+                  User uGanador = ganadorList.get(0);
+                  List<Rank> ganadorRank = Rank.where("user_id =?",uGanador.getId());
+                  
+                  //DATOS DEL PERDEDOR
+                  List<User> perdedorList = User.where("id=?",perdedorId);
+                  User uPerdedor = perdedorList.get(0);
+                  List<Rank> perdedorRank = Rank.where("user_id =?",uPerdedor.getId());
+                  
+                  System.out.println("id perdedor: "+perdedorId+" id ganador "+ganadorId);
+                  //CARGO DATOS GANADOR
+                  if (ganadorRank.isEmpty()){
+                      System.out.println("CREO NEW RANK");
+                        Rank r0 = new Rank();
+                        r0.set("games_won",1);
+                        r0.set("games_played",1);
+                        r0.save();
+                        uGanador.add(r0);
+                        
+                        uGanador.save();
+                  }else{
+                     //el usuario ganador si estaba en el ranking
+                      System.out.println("estaba creado");
+                        Rank r1 = ganadorRank.get(0);
+                        r1.set("games_won",r1.getInteger("games_won")+1);
+                        r1.set("games_played",r1.getInteger("games_played")+1);
+                         r1.save();
+                        uGanador.add(r1);
+                       
+                        uGanador.save();
+                   }
+                  if (perdedorRank.isEmpty()){
+                         System.out.println("CREO NEW RANK perdedor");
+                        Rank r2 = new Rank();
+                        r2.set("games_won",0);
+                        r2.set("games_played",1);
+                        r2.save();
+                        uPerdedor.add(r2);
+                        
+                        uPerdedor.save();
+                  }else{
+                     //el usuario perdedor si estaba en el ranking
+                      System.out.println("estaba creado perdedor");
+                        Rank r3 = perdedorRank.get(0);
+                        r3.set("games_played",r3.getInteger("games_played")+1);
+                        r3.save();
+                        uPerdedor.add(r3);
+                       
+                        uPerdedor.save();
+                   } 
+               
                    
-                   if (list3.isEmpty()){
-                    //el usuario perdedor no estaba en el ranking
-                    Rank r = new Rank();
-
-                    //r.set("user_id",list.get(1));
-                    r.set("games_won",0);
-                    r.set("games_played",1);
-                    u.add(r);
-                    r.save();
-                    u.save();
-
-                }else{
-                    //el usuario perdedor si estaba en el ranking
-                    Rank r = list1.get(0);
-                    r.set("games_won",r.getInteger("games_won"));
-                    r.set("games_played",r.getInteger("games_played")+1);
-                    u.add(r);
-                    r.save();
-                    u.save();
-                    
-                } 
                    
-                //Cargo rank del jugador ganador
-                
-                 if (list1.isEmpty()){
-                    //el usuario ganador no estaba en el ranking
-                    Rank r = new Rank();
-
-                    //r.set("user_id",list.get(1));
-                    r.set("games_won",1);
-                    r.set("games_played",1);
-                    u.add(r);
-                    r.save();
-                    u.save();
-
-                }else{
-                    //el usuario ganador si estaba en el ranking
-                    Rank r = list1.get(0);
-                    r.set("games_won",r.getInteger("games_won")+1);
-                    r.set("games_played",r.getInteger("games_played")+1);
-                    u.add(r);
-                    r.save();
-                    u.save();
-                    
-                }
+                 
                   
                 //registro el juego con su ganador
                 Game game = new Game();
      
-                 List<User> ulist1 = User.where("id=?",player1);
-                 List<User> ulist2 = User.where("id=?",player2);
-                 List<User> ulistWin = User.where("id=?",ganador);
-                 game.set("player1_id",ulist1.get(0).getId());
-                 game.set("player2_id",ulist2.get(0).getId());
-                 game.set("win_id",ulistWin.get(0).getId());
+       
+                 game.set("player1_id",tablero.getIdp1());
+                 game.set("player2_id",tablero.getIdp2());
+                 game.set("win_id",uGanador.getId());
                  game.save();
                  tablero.clear(); 
                 

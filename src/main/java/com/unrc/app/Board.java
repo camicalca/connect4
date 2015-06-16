@@ -33,6 +33,9 @@ public class Board {
         }
     }
     public void clear(){
+        turno=1;
+        idp1=0;
+        idp2=0;
         matrix=new int[7][6];
         for(int i=0;i<7;i++){
              for(int j=0;j<6;j++){

@@ -12,6 +12,8 @@
 		
 		<form action="/play" method="POST">
 			<label><h3> Jugar</h3></label>
+
+		
 			<select name="combobox_usuario1">
 				{{#users}}
 				<option value="{{id}}"> {{toString}}</option>
@@ -22,7 +24,7 @@
 				<option value="{{id}}"> {{toString}}</option>
 				{{/users}}
 			</select>
-			<input  type="submit" value="Jugar"name="play">
+				<input  type="submit" value="Jugar"name="play">
 			
 					
 		

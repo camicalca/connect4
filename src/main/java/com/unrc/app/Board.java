@@ -91,12 +91,12 @@ public class Board {
     
     private String returnImage(int number){
         if (number==0){
-            return "<img src='http://k30.kn3.net/E/3/4/5/3/C/4B3.png'>";
+            return "<img src='blanca.png'>";
         }else if(number==1){
-            return "<img src='http://k33.kn3.net/6/4/0/8/A/1/EBB.png'>";
+            return "<img src='azul.png'>";
         
         }else if (number==2){
-            return "<img src='http://k33.kn3.net/B/C/D/2/E/D/7C9.png'>";
+            return "<img src='roja.png'>";
             
         }else{
             return null;

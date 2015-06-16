@@ -4,15 +4,13 @@
 		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg">
 	</head>
 	<body>
-		<h1>Bienvenidos al juego CONNECT 4</h1>	
-		<img src="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" alt="Logotipo Connect4" title="Logotipo Connect4" width="300" height="200"/>
+		<center><img src="logo.png" alt="Logotipo Connect4" title="Logotipo Connect4"/></center>
 		<hr>
-		<h4>Juego</h4>	
-		
+	<center>	
 			
 	{{usuario1}}
 	{{usuario2}}
-	Turno{{jugador}}
+	Turno: {{jugador}}
 	
 	<form action="/game" method="POST">
 		<input type="hidden"name="game_id" value={{current.game_id}} />
@@ -34,22 +32,18 @@
 	
 	{{{tablero}}}
 	{{{javascript}}}
-		
+		<div>
 		<form action="guardar" method="POST">
-				<label>guardar</label>
-				<input  type="submit" value="Guardar Partida"name="guardar">
-		
+				<input  type="submit" value="Guardar"name="guardar">
 		</form>
 		
 		
 		
 		
 		<form action="rank" method="POST">
-				<label>rank</label>
-				<input  type="submit" value="Ver Rank"name="rank">
-			
+				<input  type="submit" value="Ver ranking"name="rank">
 		</form>
-
-
+	</div>
+		</center>
 	</body>
 </html><tr>

@@ -63,7 +63,7 @@ public class MenuPrincipal {
                 attributes.put("tablero",test);
                 Game.delete("id=?", idGame);
                 //Base.close();
-                return new ModelAndView(attributes, "game.mustache");
+                return new ModelAndView(attributes, "webApp/game.mustache");
             }, new MustacheTemplateEngine());
                 
                 
@@ -77,7 +77,7 @@ public class MenuPrincipal {
                 attributes.put("idgame",idgame);
                 
                 //Base.close();
-                return new ModelAndView(attributes, "play.mustache");
+                return new ModelAndView(attributes, "webApp/play.mustache");
             }, new MustacheTemplateEngine());
         
      //------------------------------------------------------------------------
@@ -91,7 +91,7 @@ public class MenuPrincipal {
                 attributes.put("users",users);
                 
                 //Base.close();
-                return new ModelAndView(attributes, "play.mustache");
+                return new ModelAndView(attributes, "webApp/play.mustache");
             }, new MustacheTemplateEngine());
         
         
@@ -123,11 +123,11 @@ public class MenuPrincipal {
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
                     attributes.put("jugador",1);
-                    return new ModelAndView(attributes, "game.mustache");
+                    return new ModelAndView(attributes, "webApp/game.mustache");
                     
                    //return new ModelAndView(null, "game.mustache"); 
                 }else{
-                    return new ModelAndView(null, "nogame.mustache"); 
+                    return new ModelAndView(null, "webApp/nogame.mustache"); 
                 }
                
             }, new MustacheTemplateEngine());
@@ -147,10 +147,10 @@ public class MenuPrincipal {
                     System.out.println("findall**********  "+users);
                     attributes.put("users",users);
                     //Base.close();
-                   return new ModelAndView(attributes, "play.mustache"); 
+                   return new ModelAndView(attributes, "webApp/play.mustache"); 
                 }else{
                     //Base.close();
-                    return new ModelAndView(null, "nogame.mustache"); 
+                    return new ModelAndView(null, "webApp/nogame.mustache"); 
                 }
                
             }, new MustacheTemplateEngine());
@@ -255,7 +255,7 @@ public class MenuPrincipal {
                  game.save();
                  tablero.clear(); 
                 
-                return new ModelAndView(null,"ganador.html");
+                return new ModelAndView(null,"webApp/ganador.html");
                 
                 }else{
                
@@ -267,7 +267,7 @@ public class MenuPrincipal {
                attributes.put("usuario2",player2);
               System.out.println("siguiente"+jugador);
                //Base.close();
-               return new ModelAndView(attributes,"game.mustache");}
+               return new ModelAndView(attributes,"webApp/game.mustache");}
             }, new MustacheTemplateEngine());
      
     //--------------------------------------------------------------------------    
@@ -276,7 +276,7 @@ public class MenuPrincipal {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.put("message", "Hello FreeMarker World");
 
-               return new ModelAndView(attributes, "hello.mustache");
+               return new ModelAndView(attributes, "webApp/hello.mustache");
             }, new MustacheTemplateEngine());
     //--------------------------------------------------------------------------
            
@@ -300,7 +300,7 @@ public class MenuPrincipal {
                 }
                 //attributes.put("rankings",rankeado);
                //Base.close();
-               return new ModelAndView(attributes,"rank.mustache");
+               return new ModelAndView(attributes,"webApp/rank.mustache");
             }, new MustacheTemplateEngine());
             
         
@@ -335,7 +335,7 @@ public class MenuPrincipal {
                 
                 //Base.close(); 
                 tablero.clear();
-               return new ModelAndView(null,"hello.mustache");
+               return new ModelAndView(null,"webApp/hello.mustache");
             }, new MustacheTemplateEngine());
             
                 
@@ -379,48 +379,12 @@ public class MenuPrincipal {
        } 
        return res;
     }
-    private static void reanudarPartida(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Ingrese el id del juego guardado");
-        Integer idJuego = reader.nextInt();
-        List<Game> lJuego = Game.where("id=?",idJuego);
-        List<Cell> lCell = Cell.where("game_id=?",idJuego);
-        if (lJuego.isEmpty() || lCell.isEmpty()){
-            
-             System.out.println("ID NO VALIDO");
-            
-        }else{
-            Integer idUser1 = lJuego.get(0).getInteger("player1_id");
-            List<User> user1 = User.where("id=?",idUser1);
-            
-            
-            Integer idUser2 = lJuego.get(0).getInteger("player2_id");
-            List<User> user2 = User.where("id=?",idUser2);
-            
-            String player1 = user1.get(0).getString("username");
-            String player2 = user2.get(0).getString("username");
-           // Board tableroGuardado = NewGame.loadBoard(idJuego);
-           // NewGame.play(tableroGuardado, player1, player2);
-            
-        }
+   
         
         
     
-    }
-    private static void verRanking(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Ingrese el username del usuario");
-        String username = reader.next();
-        List<User> userL = User.where("username=?",username);
-        if(userL.isEmpty()){
-            System.out.println("Usuario no encontrado");
-        }else{
-            List<Rank> rankl = Rank.where("user_id=?",userL.get(0).getInteger("id"));
-            System.out.println("Juegos ganados del usuario "+username+": "+rankl.get(0).getInteger("games_won"));
-        }
-        
-        
-        }
+    
+  
      
         public static boolean registrar(String usuario,String nombre,String apellido,String mail){
             List<User> usuarioL = User.where("username=?",usuario);
@@ -434,16 +398,7 @@ public class MenuPrincipal {
         
         
         
-    
-    private static void eliminarUsuario(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Ingrese el username del usuario a eliminar (Borra en cascada)");
-        String username = reader.next();
-        User usuario = User.findFirst("username=?",username);
-        usuario.deleteCascade();
-    
-    }
-   
+ 
         
         
         

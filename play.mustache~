@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<title>Connect4</title>		
+		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" >
+	</head>
+	<body>
+		<h1 align="center"> Registro CONNECT 4</h1>	
+		<img src="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" alt="Logotipo Connect4" title="Logotipo Connect4" width="300" height="200"/>
+		<hr>
+		
+		
+		
+		<form action="/play" method="POST">
+			<label><h3> Jugar</h3></label>
+			<select name="combobox_usuario1">
+				{{#users}}
+				<option value="{{id}}"> {{toString}}</option>
+				{{/users}}
+			</select>
+			<select name="combobox_usuario2">
+				{{#users}}
+				<option value="{{id}}"> {{toString}}</option>
+				{{/users}}
+			</select>
+			<input  type="submit" value="Jugar"name="play">
+			
+					
+		
+		</form>
+		
+		<form action="/Cargar" method="POST">
+			<label><h3> Cargar Partida Guardada</h3></label>
+			<select name="juegoguardado">
+				{{#idgame}}
+				<option value="{{id}}"> {{id}}</option>
+				{{/idgame}}
+			</select>
+			
+			<input  type="submit" value="Cargar"name="Cargar">
+			
+					
+		
+		</form>
+		
+		
+		
+		
+		
+		
+		
+		<form action="/play" method="POST">
+			<p align="center">
+				<label for="Usuario1R"/>
+				<input type="text" value="Usuario" name="Usuario1R">
+				
+			</p>
+			<p align="center">
+				<label for="Usuario2R"/>
+				<input type="text" value="Usuario2" name="Usuario2R">
+				
+			</p>
+			<p align="center">
+				<input  type="submit" value="Ingresar"name="play1">
+			</p>
+		</form>			
+			
+			<hr>
+		<form action="/registrar" method="POST">
+			<p align="center">
+				<label for="Usuario1"/>
+				<input type="text" value="Usuario" name="Usuario1">
+				
+			</p>
+			
+			<p align="center">			
+				<label for="nombre1"/>
+				<input type="text" value="Nombre" name="nombre1">
+				
+			</p>
+			<p align="center">			
+				<label for="apellido1"/>
+				<input type="text" value="Apellido" name="apellido1">
+				
+			</p>
+			<p align="center">			
+				<label for="mail1"/>
+				<input type="text" value="E-MAIL" name="mail1">
+				
+			
+			<p align="center">
+				<input  type="submit" value="Registrarse"name="registrar">		
+			</p>	
+					
+			</form>	
+			<a target="_blank" href="https://www.facebook.com/AgustinMartinez01" >Cuenta en facebook</a>
+			
+	
+		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

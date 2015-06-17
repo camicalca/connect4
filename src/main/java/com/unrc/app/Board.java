@@ -181,16 +181,7 @@ public class Board {
                    
             return tabla;
     }
-    public  void toStringShell(){
-      for (int x=0; x < matrix.length; x++) {
-        System.out.print("F["+x+"]"+" |");
-      for (int y=0; y < matrix[x].length; y++) {
-        System.out.print (matrix[x][y]);
-      if (y!=matrix[x].length-1) System.out.print("\t");
-      }
-    System.out.println("|");
-    }
-  }
+ 
      public void loadBoard(Integer gameid){
           List<Cell> cellList = Cell.where("game_id=?",gameid);
           int index = 0;

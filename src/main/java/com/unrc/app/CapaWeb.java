@@ -87,7 +87,7 @@ public class CapaWeb {
            
                 Map<String, Object> attributes = new HashMap<>();
                 List <User> users = User.findAll();
-                System.out.println("findall**********  "+users);
+         
                 attributes.put("users",users);
                 
         
@@ -112,7 +112,7 @@ public class CapaWeb {
               
                 
              
-               tablero.toStringShell();
+            
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
                 if (!(player1.equals( player2))){

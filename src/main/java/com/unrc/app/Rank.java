@@ -9,7 +9,9 @@ public class Rank extends Model{
     }
     
    public String toStringu (){
-    return this.getString("user_id");
+    int u_id=this.getInteger("user_id");
+    User u = User.findFirst("id=?",u_id);
+    return u.getString("username");
 }   
    
    public String toStringgw (){
@@ -18,6 +20,13 @@ public class Rank extends Model{
   
    public String toStringgp (){
     return this.getString("games_played");
-}   
+   }
+   public String toStringEff (){
+       float jugados= this.getInteger("games_played");
+       float ganados =this.getInteger("games_won");
+ 
+     float eff = (ganados/jugados)*100;
+    return String.valueOf(eff)+"%";
+   }  
 
 }

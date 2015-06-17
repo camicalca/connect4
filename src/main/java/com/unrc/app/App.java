@@ -13,6 +13,6 @@ public class App
     public static void main( String[] args )
     {
         externalStaticFileLocation("./webApp/imagenes");
-        MenuPrincipal.mostrarMenuPrincipal();
+        CapaWeb a = new CapaWeb();
     }
 }

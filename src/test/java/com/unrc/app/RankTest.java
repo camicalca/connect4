@@ -9,6 +9,7 @@ import com.unrc.app.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.javalite.test.jspec.JSpec.the;
+import static org.junit.Assert.assertTrue;
 
 
 public class RankTest {
@@ -29,7 +30,10 @@ public class RankTest {
 
     @Test
     public void shouldValidateMandatoryFields(){
+      System.out.println("No negative rank :)");
       Rank rank = new Rank();
-      //assertTrue("Ranking no negativo",(rank.getInteger("position")>0));
+      User usuario = new User();
+      usuario.set(rank);
+      assertTrue("Ranking no negativo",(rank.getInteger("games_won")>=0));
     }
 }

@@ -330,6 +330,12 @@ public class CapaWeb {
                 tablero.clear();
                return new ModelAndView(null,"webApp/hello.mustache");
             }, new MustacheTemplateEngine());
+           
+            /*--------------------------------------------------------------------*/    
+           post("/creditos", (request,response) -> {
+               
+               return new ModelAndView(null,"webApp/creditos.html");
+            }, new MustacheTemplateEngine());
             
                 
 	

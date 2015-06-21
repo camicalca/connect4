@@ -29,11 +29,18 @@ public class RankTest {
 
 
     @Test
-    public void shouldValidateMandatoryFields(){
+    public void shouldValidateRanks(){
       System.out.println("No negative rank :)");
-      Rank rank = new Rank();
+      
       User usuario = new User();
+      usuario.set("username","santipassa");
+      usuario.set("nombre","santiago");
+   
+      usuario.save();
+     
+      Rank rank = new Rank();
       usuario.set(rank);
+      
       assertTrue("Ranking no negativo",(rank.getInteger("games_won")>=0));
     }
 }

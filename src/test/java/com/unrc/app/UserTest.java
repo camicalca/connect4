@@ -1,5 +1,6 @@
 package com.unrc.app;
 
+import com.unrc.app.Models.User;
 import org.javalite.activejdbc.Base;
 import org.junit.After;
 import org.junit.Before;

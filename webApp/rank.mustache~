@@ -17,9 +17,9 @@
 		</p>	
 		<p align="rigth">
 			{{#ranking}}
-				id: {{user_id}}
-				Jueos Ganados{{games_won}}
-				Juegos JUgados{{games_played}}<br />
+				id: {{toStringu}}
+				Jueos Ganados{{toStringgw}}
+				Juegos JUgados{{toStringgp}}<br />
 			{{/ranking}}
 		</p>
 	</body>

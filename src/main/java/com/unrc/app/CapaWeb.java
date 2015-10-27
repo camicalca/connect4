@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.unrc.app;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import org.javalite.activejdbc.Base;
-import static org.javalite.activejdbc.Model.attributes;
 import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.before;
 import static spark.Spark.after;
 /**
  *
- * @author santiago
+ * @author 
  */
 public class CapaWeb {
        
@@ -29,7 +20,7 @@ public class CapaWeb {
                 String driver = "com.mysql.jdbc.Driver";
                 String jdbs = "jdbc:mysql://localhost/connect4_development";
                 String usubd = "root";
-                String contrbd = "Control123";
+                String contrbd = "root";
                 Board tablero =new Board();
         
                 
@@ -172,7 +163,7 @@ public class CapaWeb {
                     jugador=1;
                 
                 }
-                BoardTools.move(tablero,i,jugador);
+                if (BoardTools.move(tablero,i,jugador)){
                 if(BoardTools.checkBoard(tablero)){
                    int perdedor;
                    int perdedorId;
@@ -271,6 +262,9 @@ public class CapaWeb {
         
         
                return new ModelAndView(attributes,"webApp/game.mustache");}
+               }else{
+		return new ModelAndView(null,"webApp/empate.html");
+               }
             }, new MustacheTemplateEngine());
      
     //--------------------------------------------------------------------------    

@@ -1,6 +1,7 @@
 
 package com.unrc.app;
 
+import com.unrc.app.Models.Board;
 import java.util.List;
 
 /**

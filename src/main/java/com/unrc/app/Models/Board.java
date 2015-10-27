@@ -1,5 +1,5 @@
 
-package com.unrc.app;
+package com.unrc.app.Models;
 
 import java.util.List;
 

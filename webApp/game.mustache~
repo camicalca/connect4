@@ -2,6 +2,7 @@
 	<head>
 		<title>Connect4</title>		
 		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
 	</head>
 	<body background="fondo.jpg" text="#FFFFFF">
 		<center><img src="logo.png" alt="Logotipo Connect4" title="Logotipo Connect4"/></center>
@@ -12,13 +13,13 @@
 	{{usuario2}}
 	Turno: {{jugador}}
 	
-	<form action="/game" method="POST">
+	<form id="form1" action="/game" method="POST">
 		<input type="hidden"name="game_id" value={{current.game_id}} />
 		<input type="hidden" name="jugador" value={{jugador}}/>
 		<input type="hidden" name="usuario1" value={{usuario1}}/>
 		<input type="hidden" name="usuario2" value={{usuario2}}/>
 		<input type="hidden"name="columna1"  />	
-		<input type="submit" style="width:96px; height:25px" value="TIRAR 1" name="tirar0" />
+		<input type="submit" style="width:96px; height:25px" value="TIRAR 1" id="tirar0" />
 		<input type="submit" style="width:96px; height:25px" value="TIRAR 2" name="tirar1"/>
 		<input type="submit" style="width:96px; height:25px" value="TIRAR 3" name="tirar2"/>
 		<input type="submit" style="width:96px; height:25px" value="TIRAR 4" name="tirar3"/>
@@ -28,18 +29,33 @@
 		
 	</form>	
 	
-	$("document").ready(function(e){
-		$("#form1").ajax({
-			url:"/play",
-			data:{colum:"1",game_id:"x"},
-			metod:"Post")}.done(function(data){
-				alert("hola");}
-		})	
+	<script>
+	alert("chau");
+	$("document").ready(function(){
+	 console.log("Esta empezando a cargar el javascript");
+     $("#tirar0").on("click", function(ev){
+       console.log("hizo click en el primer boton");
+       
+      $.ajax({
+        url: "/game",
+        data: {"tirar": "0"},
+        method: "POST"
+      });       
+       
+       $.ajax({
+			url:"/game",
+			data: {"tirar":"0"},
+			method:"post"
+		 }).done(function(data){
+		    console.log("hola mundo cruel");
+          console.log(data);		 
+		 });
+		 
+		 ev.preventDefault();
+		});
+	});
 	
-
-		
-
-
+	</script>
 	
 	{{{tablero}}}
 	{{{javascript}}}

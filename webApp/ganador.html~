@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<script>
+
+    alert("PARTIDA TERMINADA!");
+    window.location="http://localhost:4567";
+
+</script>
+
+</body>
+</html>
+

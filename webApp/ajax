@@ -1,0 +1,21 @@
+<script>
+	alert("chau");
+	$("document").ready(function(){
+	  console.log("Esta empezando a cargar el javascript");
+     $("#tirar0").on("click", function(ev){
+       console.log("hizo click en el primer boton");
+       
+       $.ajax({
+			url:"/game",
+			data: {"tirar":"0"},
+			method:"post"
+		 }).done(function(data){
+		    console.log("hola mundo cruel");
+          console.log(data);		 
+		 });
+		 
+		 ev.preventDefault();
+		});
+	});
+	
+	</script>

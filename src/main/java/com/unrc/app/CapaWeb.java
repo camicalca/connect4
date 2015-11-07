@@ -27,6 +27,7 @@ public class CapaWeb {
                 String usubd = "root";
                 String contrbd = "root";
                 Board tablero =new Board();
+               
         
                 
                 before((request,response) -> {
@@ -150,6 +151,12 @@ public class CapaWeb {
             
     //--------------------------------------------------------------------------
             post("/game", (request,response) -> {
+                
+                //System.out.println("/game...");
+                //System.out.println(request);
+                //System.out.println(request.queryParams());
+                
+                
                 int player1 = tablero.getIdp1();
                 int player2 = tablero.getIdp2();
                 int jugador;
@@ -260,8 +267,13 @@ public class CapaWeb {
                
                
                attributes.put("jugador",jugador);
+              
+
+///esto hay que modificar
                String test = tablero.toStringB();
-               attributes.put("tablero",test);
+             //  attributes.put("tablero",tablero.getStringMatrix());
+                attributes.put("tablero",test);
+               System.out.print(tablero.getStringMatrix());
                attributes.put("usuario1",player1);
                attributes.put("usuario2",player2);
         

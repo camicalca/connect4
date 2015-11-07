@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Board {
     private  int [][]matrix;
+    private String [][] stringMatrix;
     private int turno=1;
     private int idp1=0;
     private int idp2=0;
@@ -26,9 +27,11 @@ public class Board {
     //constructor por defecto
     public Board(){
         matrix=new int[7][6];
+        stringMatrix=new String[7][6];
         for(int i=0;i<7;i++){
              for(int j=0;j<6;j++){
                  matrix[i][j]=0;
+                 stringMatrix[i][j]="<img src='blanca.png'>";
             }
         }
     }
@@ -40,6 +43,7 @@ public class Board {
         for(int i=0;i<7;i++){
              for(int j=0;j<6;j++){
                  matrix[i][j]=0;
+                 stringMatrix[i][j]="<img src='blanca.png'>";
             }
         }
     }
@@ -83,10 +87,16 @@ public class Board {
     }
     public int[][] getMatrix() {
         return matrix;
-    }  
+    } 
+    
+     public String[][] getStringMatrix() {
+        return stringMatrix;
+    } 
     public void setCell(int row,int column,int value){
         matrix[row][column]=value;
+        stringMatrix[row][column]=returnImage(value);
     }
+    
     public int getCell(int row,int column){
         return matrix[row][column];
     }
@@ -194,5 +204,6 @@ public class Board {
       
       
       }
+
     
 }

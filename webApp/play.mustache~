@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>Connect4</title>		
+		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg" >
+	</head>
+	<body background="fondo.jpg" text="#FFFFFF">
+		<h1 align="center"> Empezar partida</h1>	
+		<center><img src="logo.png" alt="Logotipo Connect4" title="Logotipo Connect4"/></center>
+		<hr>
+		
+		
+		<center>
+		<form action="/play" method="POST">
+			<label><h3> Jugar</h3></label>
+
+		
+			<select name="combobox_usuario1">
+				{{#users}}
+				<option value="{{id}}"> {{toString}}</option>
+				{{/users}}
+			</select>
+			<label><h3><img src="vs.png"></h3></label>
+			<select name="combobox_usuario2">
+				{{#users}}
+				<option value="{{id}}"> {{toString}}</option>
+				{{/users}}
+			</select>
+				<label><h3> <input type=image src="ir.png" width="80" height="30"></h3></label>
+			
+					
+		<hr>
+		</form>
+		
+		<form action="/Cargar" method="POST">
+			<label><h3>CARGAR PARTIDA GUARDADA</h3></label>
+			<select name="juegoguardado">
+				{{#idgame}}
+				<option value="{{id}}"> {{id}}</option>
+				{{/idgame}}
+			</select>
+			<label><h3><input type=image src="cargar.png" width="100" height="50"></h3></label>
+		
+			
+					
+		
+		</form>
+		<hr>
+		<form action="/registrar" method="POST">
+			<label><h3>REGISTRAR USUARIOS</h3></label>
+			<p align="center">
+				<label for="Usuario1"/>
+				<input type="text" value="Usuario" name="Usuario1">
+				
+			</p>
+			
+			<p align="center">			
+				<label for="nombre1"/>
+				<input type="text" value="Nombre" name="nombre1">
+				
+			</p>
+			<p align="center">			
+				<label for="apellido1"/>
+				<input type="text" value="Apellido" name="apellido1">
+				
+			</p>
+			<p align="center">			
+				<label for="mail1"/>
+				<input type="text" value="E-MAIL" name="mail1">
+				
+			
+			<p align="center">
+				<input type=image src="registrar.png" width="100" height="50">	
+			</p>	
+					
+			</form>	
+			
+			</center>
+	
+		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

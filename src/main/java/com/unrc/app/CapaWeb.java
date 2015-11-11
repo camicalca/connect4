@@ -25,7 +25,7 @@ public class CapaWeb {
                 String driver = "com.mysql.jdbc.Driver";
                 String jdbs = "jdbc:mysql://localhost/connect4_development";
                 String usubd = "root";
-                String contrbd = "root";
+                String contrbd = "Control123";
                 Board tablero =new Board();
                
         
@@ -132,8 +132,8 @@ public class CapaWeb {
                 String nombre = request.queryParams("nombre1");
                 String apellido = request.queryParams("apellido1");
                 String mail = request.queryParams("mail1");
-     
-                boolean a = registrar(usuario,nombre,apellido,mail);
+                String contrasenia = request.queryParams("contrasenia");
+                boolean a = registrar(usuario,contrasenia,nombre,apellido,mail);
                 
                 if (a){
                     Map<String, Object> attributes = new HashMap<>();
@@ -392,16 +392,10 @@ public class CapaWeb {
        return res;
     }
    
-        
-        
-    
-    
-  
-     
-        public static boolean registrar(String usuario,String nombre,String apellido,String mail){
+public static boolean registrar(String usuario,String contrasenia,String nombre,String apellido,String mail){
             List<User> usuarioL = User.where("username=?",usuario);
              if (usuarioL.isEmpty()){
-                  UserChecks.newUser(apellido,nombre,mail,usuario);
+                  UserChecks.newUser(apellido,nombre,mail,usuario,contrasenia);
                   return true;
              }else{
                  return false;

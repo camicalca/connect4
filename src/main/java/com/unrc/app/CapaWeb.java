@@ -14,12 +14,21 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.before;
 import static spark.Spark.after;
+
+
+import static spark.Spark.get;
+import static spark.Spark.post;
+
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
 /**
  *
  * @author 
  */
 public class CapaWeb {
-       
+       private static final String SESSION_NAME = "username";
     public CapaWeb(){
             //Declaro variables de la base de datos
                 String driver = "com.mysql.jdbc.Driver";
@@ -27,7 +36,7 @@ public class CapaWeb {
                 String usubd = "root";
                 String contrbd = "root";
                 Board tablero =new Board();
-               
+                
         
                 
                 before((request,response) -> {
@@ -96,20 +105,17 @@ public class CapaWeb {
         //Metodo post que carga usuarios ya registrados
             post("/play", (request, response) -> {
                 Map<String, Object> attributes = new HashMap<>();
-   
                 
-                String player1 = request.queryParams("combobox_usuario1");
-                String player2 = request.queryParams("combobox_usuario2");
-      
+                
+                String player1 = request.queryParams("Usuario");
+                String player2 = request.queryParams("Contrasenia");
+                if (player1 != null) {
+                    request.session().attribute(SESSION_NAME,player1);
+            }
+            response.redirect("/game.mustache/id");
+            /*return null;
                 tablero.setIdp1(Integer.parseInt(player1));
                 tablero.setIdp2(Integer.parseInt(player2));
-                
-                
-                
-              
-                
-             
-            
                 String test = tablero.toStringB();
                 attributes.put("tablero",test);
                 if (!(player1.equals( player2))){
@@ -120,9 +126,9 @@ public class CapaWeb {
                     return new ModelAndView(attributes, "webApp/game.mustache");
                     
  
-                }else{
-                    return new ModelAndView(null, "webApp/nogame.mustache"); 
-                }
+                }else{*/
+                    return new ModelAndView(null, "webApp/nogame.mustache");
+                //}
                
             }, new MustacheTemplateEngine());
     //--------------------------------------------------------------------------

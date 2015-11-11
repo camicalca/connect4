@@ -152,9 +152,9 @@ public class CapaWeb {
     //--------------------------------------------------------------------------
             post("/game", (request,response) -> {
                 
-                //System.out.println("/game...");
-                //System.out.println(request);
-                //System.out.println(request.queryParams());
+                System.out.println("/game...");
+                System.out.println(request);
+                System.out.println(request.queryParams("tirar"));
                 
                 
                 int player1 = tablero.getIdp1();
@@ -163,10 +163,12 @@ public class CapaWeb {
                 Map<String, Object> attributes = new HashMap<>();
                 attributes.put("usuario1",player1);
                 attributes.put("usuario2",player2);
-                int i=0;
-                while((request.queryParams("tirar"+i))==null){
+                int i=1;
+                /*while((request.queryParams("tirar"+i))==null){
                     i++;
-                }
+                }*/
+                i=Integer.parseInt(request.queryParams("tirar"));
+                i--;
                 int turno=tablero.getTurno();
                 if(turno%2==0){
                     jugador=2;

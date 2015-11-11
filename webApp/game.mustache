@@ -41,8 +41,8 @@
 			data: {"tirar": $(this).val()},
 			method:"post"
 		 }).done(function(data){
-		    console.log("hola mundo cruel");
-          console.log(data);		 
+		    $("html").html(data);
+		    reaload();		 
 		 });
 		 
 		 ev.preventDefault();

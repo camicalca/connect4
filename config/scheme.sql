@@ -8,7 +8,8 @@ CREATE TABLE users(
     username varchar(45) UNIQUE,
     email VARCHAR(60) UNIQUE,
     first_name VARCHAR(56),
-    last_name VARCHAR(56)
+    last_name VARCHAR(56),
+    contrasenia VARCHAR(45)
 
  
 );

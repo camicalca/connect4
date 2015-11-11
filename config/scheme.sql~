@@ -28,8 +28,7 @@ CREATE TABLE users(
     player1_id INT(11) ,
     player2_id INT(11),
     win_id INT(11), 
-  dateinit date,
-  datefinish date
+   turno  INT(11)
    
 );
 DROP TABLE IF EXISTS cells;

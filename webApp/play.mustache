@@ -12,21 +12,25 @@
 		<center>
 		<form action="/play" method="POST">
 			<label><h3> Jugar</h3></label>
-
-		
-			<select name="combobox_usuario1">
-				{{#users}}
-				<option value="{{id}}"> {{toString}}</option>
-				{{/users}}
-			</select>
-			<label><h3><img src="vs.png"></h3></label>
-			<select name="combobox_usuario2">
-				{{#users}}
-				<option value="{{id}}"> {{toString}}</option>
-				{{/users}}
-			</select>
-				<label><h3> <input type=image src="ir.png" width="80" height="30"></h3></label>
+			<p align="center">
+				<label for="Usuario"/>
+				<input type="text" value="Usuario" name="Usuario">
+				
+			</p>
 			
+			<p align="center">			
+				<label for="contrasenia"/>
+				<input type="text" value="Contrasenia" name="Contrasenia">
+				
+			</p>
+			
+			<p align="center">
+				<input type=image src="jugar.png" width="100" height="50">	
+			</p>	
+					
+			</form>	
+			
+			</center>
 					
 		<hr>
 		</form>
@@ -56,6 +60,11 @@
 			<p align="center">			
 				<label for="nombre1"/>
 				<input type="text" value="Nombre" name="nombre1">
+				
+			</p>
+			<p align="center">			
+				<label for="contrasenia"/>
+				<input type="text" value="Contraseña" name="contrasenia">
 				
 			</p>
 			<p align="center">			

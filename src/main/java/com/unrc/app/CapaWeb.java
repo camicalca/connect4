@@ -14,12 +14,21 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.before;
 import static spark.Spark.after;
+
+
+import static spark.Spark.get;
+import static spark.Spark.post;
+
+import spark.Request;
+import spark.Response;
+import spark.Route;
+
 /**
  *
  * @author 
  */
 public class CapaWeb {
-       
+       private static final String SESSION_NAME = "username";
     public CapaWeb(){
             //Declaro variables de la base de datos
                 String driver = "com.mysql.jdbc.Driver";
@@ -27,7 +36,7 @@ public class CapaWeb {
                 String usubd = "root";
                 String contrbd = "control123";
                 Board tablero =new Board();
-               
+                online enlinea = new online();
         
                 
                 before((request,response) -> {
@@ -90,39 +99,106 @@ public class CapaWeb {
         
                 return new ModelAndView(attributes, "webApp/play.mustache");
             }, new MustacheTemplateEngine());
+       
+       //-----------------------------------------------------------------------
+       
+       post("/play", (request,response) -> {
+            
         
+                Map<String, Object> attributes = new HashMap<>();
+                String player1 =" ";
+                String contrasenia="";
+                player1 = request.queryParams("Usuario");
+                contrasenia = request.queryParams("Contrasenia");
+                List<User> usuario = User.where("username=? and contrasenia=?",player1,contrasenia);
+                
+                if (usuario.isEmpty()){
+                   return new ModelAndView(null, "webApp/nogame.mustache"); 
+                  
+                }else{
+                    
+                    if (player1 != null) {
+                        request.session().attribute(SESSION_NAME, player1);
+                        
+                    }
+                    response.redirect("/vsu");
+                    return null;
+                    
+                    
+                    
+                    
+                }
+                
+               
+            }, new MustacheTemplateEngine());
+       
+       
+       get("/vsu", (request, response) -> {
+            String name = request.session().attribute(SESSION_NAME);
+            if (name == null) {
+                return new ModelAndView(null, "webApp/nogame.mustache"); 
+            } else {
+                Map<String, Object> attributes = new HashMap<>();
+                List<User> usuario = User.where("username=?",name);
+                User uSer = usuario.get(0);
+                    String session = uSer.getString("id");
+                    enlinea.agregar(name);
+                    System.out.println("id de session "+session);
+                    attributes.put("SESSION_NAME",session);
+                    attributes.put("Usuario",name);
+                    
+                    attributes.put("enlinea",enlinea.list()); 
+                    System.out.println("el linea"+enlinea.toSting(0));
+                    
+                    return new ModelAndView(attributes, "webApp/vs.mustache"); 
+       
+            }
+        }, new MustacheTemplateEngine());
+       
+        
+      
         
     //--------------------------------------------------------------------------
         //Metodo post que carga usuarios ya registrados
-            post("/play", (request, response) -> {
+            post("/play1", (request, response) -> {
                 Map<String, Object> attributes = new HashMap<>();
-   
+                String player1 =" ";
+                String player2 =" ";
+                String contrasenia="";
+                player1 = request.queryParams("Usuario");
+                player2 = request.queryParams("Usuario1");
+                System.out.println("USUARIOS  "+player1+player2);
+                if ((enlinea.enjuego(player1))||(enlinea.enjuego(player2))){
+                    //aca deberia redireccionar al usuario1 al webApp/game/id
+                    return new ModelAndView(null, "webApp/game:"+enlinea.idgame(player1)+".mustache");
+                }else{
+                    
+                List<User> usuario = User.where("username=?",player1);
+                List<User> usuario1 = User.where("username=?",player2);
+                System.out.println("USUARIOS 1  "+player1+player2);
+                User uSer = usuario.get(0);
+                String session = uSer.getString("id");
+                User uSer1 = usuario1.get(0);
+                String session1 = uSer1.getString("id");
+                enlinea.jugando(player1,player2);
+                System.out.print("id de game"+enlinea.idgame(player1));
+                    System.out.print("id de session"+session);
+                    tablero.setIdp1(Integer.parseInt(session));
+                    //String player2="pepemujica";
+                    tablero.setIdp2(Integer.parseInt(session1));
+                    String test = tablero.toStringB();
+                    attributes.put("tablero",test);
                 
-                String player1 = request.queryParams("combobox_usuario1");
-                String player2 = request.queryParams("combobox_usuario2");
-      
-                tablero.setIdp1(Integer.parseInt(player1));
-                tablero.setIdp2(Integer.parseInt(player2));
-                
-                
-                
-              
-                
-             
-            
-                String test = tablero.toStringB();
-                attributes.put("tablero",test);
-                if (!(player1.equals( player2))){
-                 
+                    attributes.put("SESSION_NAME",session);
                     attributes.put("usuario1",player1);
                     attributes.put("usuario2",player2);
                     attributes.put("jugador",1);
                     return new ModelAndView(attributes, "webApp/game.mustache");
-                    
+                }   
  
-                }else{
-                    return new ModelAndView(null, "webApp/nogame.mustache"); 
-                }
+           
+           
+                
                
             }, new MustacheTemplateEngine());
     //--------------------------------------------------------------------------
@@ -132,8 +208,8 @@ public class CapaWeb {
                 String nombre = request.queryParams("nombre1");
                 String apellido = request.queryParams("apellido1");
                 String mail = request.queryParams("mail1");
-     
-                boolean a = registrar(usuario,nombre,apellido,mail);
+                String contrasenia = request.queryParams("contrasenia");
+                boolean a = registrar(usuario,contrasenia,nombre,apellido,mail);
                 
                 if (a){
                     Map<String, Object> attributes = new HashMap<>();
@@ -155,16 +231,22 @@ public class CapaWeb {
                 System.out.println("/game...");
                 System.out.println(request);
                 System.out.println(request.queryParams("tirar"));
-                
-                
+                System.out.println(request.queryParams("SESSION_NAME"));
+                Integer session = Integer.parseInt(request.queryParams("SESSION_NAME"));
+                System.out.print("id de session game "+session);
+                if (session == null) {
+                    Map attributes = new HashMap();
+                    return new ModelAndView(attributes, "webApp/nogame.mustache");
+                 }                
                 int player1 = tablero.getIdp1();
                 int player2 = tablero.getIdp2();
                 int jugador;
                 Map<String, Object> attributes = new HashMap<>();
-                attributes.put("usuario1",player1);
-                attributes.put("usuario2",player2);
+                attributes.put("SESSION_NAME",session);
+                //attributes.put("usuario1",player1);
+                //attributes.put("usuario2",player2);
                 int i=1;
-                /*while((request.queryParams("tirar"+i))==null){
+               /* while((request.queryParams("tirar"+i))==null){
                     i++;
                 }*/
                 i=Integer.parseInt(request.queryParams("tirar"));
@@ -202,9 +284,9 @@ public class CapaWeb {
                   List<Rank> ganadorRank = Rank.where("user_id =?",uGanador.getId());
                   
                   //DATOS DEL PERDEDOR
-                  List<User> perdedorList = User.where("id=?",perdedorId);
+                 /* List<User> perdedorList = User.where("id=?",perdedorId);
                   User uPerdedor = perdedorList.get(0);
-                  List<Rank> perdedorRank = Rank.where("user_id =?",uPerdedor.getId());
+                  List<Rank> perdedorRank = Rank.where("user_id =?",uPerdedor.getId());*/
                   
            
                   //CARGO DATOS GANADOR
@@ -228,7 +310,7 @@ public class CapaWeb {
                        
                         uGanador.save();
                    }
-                  if (perdedorRank.isEmpty()){
+                 /* if (perdedorRank.isEmpty()){
                       
                         Rank r2 = new Rank();
                         r2.set("games_won",0);
@@ -246,7 +328,7 @@ public class CapaWeb {
                         uPerdedor.add(r3);
                        
                         uPerdedor.save();
-                   } 
+                   } */
                
                    
                    
@@ -278,12 +360,13 @@ public class CapaWeb {
                System.out.print(tablero.getStringMatrix());
                attributes.put("usuario1",player1);
                attributes.put("usuario2",player2);
-        
+               
         
                return new ModelAndView(attributes,"webApp/game.mustache");}
                }else{
 		return new ModelAndView(null,"webApp/empate.html");
                }
+                
             }, new MustacheTemplateEngine());
      
     //--------------------------------------------------------------------------    
@@ -392,16 +475,10 @@ public class CapaWeb {
        return res;
     }
    
-        
-        
-    
-    
-  
-     
-        public static boolean registrar(String usuario,String nombre,String apellido,String mail){
+public static boolean registrar(String usuario,String contrasenia,String nombre,String apellido,String mail){
             List<User> usuarioL = User.where("username=?",usuario);
              if (usuarioL.isEmpty()){
-                  UserChecks.newUser(apellido,nombre,mail,usuario);
+                  UserChecks.newUser(apellido,nombre,mail,usuario,contrasenia);
                   return true;
              }else{
                  return false;

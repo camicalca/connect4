@@ -2,7 +2,7 @@
 	<head>
 		<title>Connect4</title>		
 		<link rel="shortcut icon" type="image/x-icon" href="http://storage.cloversites.com/oakhillbaptistchurch/site_images/page57_picture0_1333388848.jpg">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
 	</head>
 	<body background="fondo.jpg" text="#FFFFFF">
 		<center><img src="logo.png" alt="Logotipo Connect4" title="Logotipo Connect4"/></center>
@@ -12,7 +12,7 @@
 	{{usuario1}}
 	{{usuario2}}
 	Turno: {{jugador}}
-	
+	ID DE SESSION :{{SESSION_NAME}}
 	<form id="form1" action="/game" method="POST">
 		<input type="hidden"name="game_id" value={{current.game_id}} />
 		<input type="hidden" name="jugador" value={{jugador}}/>
@@ -38,11 +38,11 @@
        
        $.ajax({
 			url:"/game",
-			data: {"tirar": $(this).val()},
+			data: {"tirar": $(this).val(),"SESSION_NAME":{{SESSION_NAME}} },
 			method:"post"
 		 }).done(function(data){
 		    $("html").html(data);
-		    reaload();		 
+		    document.location.reload();	 
 		 });
 		 
 		 ev.preventDefault();
@@ -60,7 +60,7 @@
 
 	
 	{{{tablero}}}
-	{{{javascript}}}
+	
 		<div>
 		<form action="guardar" method="POST">
 				<input type=image src="guardar.png">
@@ -70,4 +70,4 @@
 	</div>
 		</center>
 	</body>
-</html><tr>
+</html>

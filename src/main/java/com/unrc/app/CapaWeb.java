@@ -25,7 +25,7 @@ public class CapaWeb {
                 String driver = "com.mysql.jdbc.Driver";
                 String jdbs = "jdbc:mysql://localhost/connect4_development";
                 String usubd = "root";
-                String contrbd = "root";
+                String contrbd = "control123";
                 Board tablero =new Board();
                
         
